@@ -7,7 +7,7 @@
 
 ## 📊 Application Flowchart
 
-![Application Flowchart](/frontend/public/Untitled%20diagram%20_%20Mermaid%20Chart-2025-07-30-144135.png)
+![image](/frontend/public/Untitled%20diagram%20_%20Mermaid%20Chart-2025-07-30-144135.png)
 
 ## 📚 Table of Contents
 
