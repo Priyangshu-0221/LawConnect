@@ -8,7 +8,7 @@
 ---
 ## 📸 Overview
 
-![image](/frontend/public/ss/home.png)![image](/frontend/public/ss/login.png)![image](/frontend/public/ss/register.png)![image](/frontend/public/ss/doctors.png)![image](/frontend/public/ss/about.png)![image](/frontend/public/ss/contact.png)
+![image](/frontend/public/ss/home.png)![image](/frontend/public/ss/login.png)![image](/frontend/public/ss/doctors.png)![image](/frontend/public/ss/about.png)![image](/frontend/public/ss/contact.png)
 
 ---
 ## 📊 Application Flowchart
