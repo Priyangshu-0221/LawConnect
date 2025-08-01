@@ -8,7 +8,8 @@
 
 ## 📸 Overview
 
-![image](/frontend/public/ss/home.png)![image](/frontend/public/ss/login.png)![image](/frontend/public/ss/doctors.png)![image](/frontend/public/ss/appointment.png)
+![image](/frontend/public/ss/home.jpeg)![image](/frontend/public/ss/)
+![image](/frontend/public/ss/login.png)![image](/frontend/public/ss/doctors.png)![image](/frontend/public/ss/appointment.png)
 ![image](/frontend/public/ss/about.png)![image](/frontend/public/ss/contact.png)
 
 ---
@@ -64,6 +65,26 @@
 - [JWT](https://jwt.io/) — Secure authentication
 - [Multer](https://github.com/expressjs/multer) — File upload middleware
 - [Bcrypt](https://github.com/kelektiv/node.bcrypt.js/) — Password hashing
+
+---
+
+## ✨ New Addition: SkiperUI Integration
+
+_We've supercharged BookMyDoc's UI with SkiperUI, a modern component library that complements our existing Shadcn/ui and Material-UI setup.3_
+
+##### 🚀 Performance-Optimized Components
+
+##### 🎨 Customizable Themes (matches BookMyDoc's design system)
+
+##### 🛠 Pre-Built Templates for appointment cards, dashboards, and forms
+
+##### 📱 Enhanced Mobile UX with touch-friendly interactions
+
+###### Integrated Components
+
+```
+<CardCarousel/>
+```
 
 ---
 

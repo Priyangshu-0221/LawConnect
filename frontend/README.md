@@ -92,6 +92,7 @@ frontend/
   - [Shadcn/ui](https://ui.shadcn.com/)
   - [Material-UI Icons](https://mui.com/material-ui/material-icons/)
 
+
 ---
 
 ## 🌐 Frontend Routes
