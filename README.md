@@ -8,7 +8,7 @@
 
 ## 📸 Overview
 
-![image](/frontend/public/ss/home.jpeg)![image](/frontend/public/ss/)
+![image](/frontend/public/ss/home.jpeg)
 ![image](/frontend/public/ss/login.png)![image](/frontend/public/ss/doctors.png)![image](/frontend/public/ss/appointment.png)
 ![image](/frontend/public/ss/about.png)![image](/frontend/public/ss/contact.png)
 

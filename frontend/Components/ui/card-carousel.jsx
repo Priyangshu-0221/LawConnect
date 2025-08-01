@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Clock, SparklesIcon } from "lucide-react";
+import { Clock, BriefcaseMedical } from "lucide-react";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -50,20 +50,19 @@ export const CardCarousel = ({
 
       <div className="mx-auto w-full max-w-4xl rounded-[24px] border border-black/5 p-2 shadow-sm md:rounded-t-[44px]">
         <div className="relative mx-auto flex w-full flex-col rounded-[24px] border border-black/5 bg-neutral-800/5 p-4 shadow-sm md:items-start md:gap-8 md:rounded-t-[40px]">
-
           <Badge
             variant="outline"
             className="absolute left-4 top-4 rounded-[14px] border border-black/10 text-base md:left-6"
           >
-            <SparklesIcon className="fill-[#EEBDE0] stroke-1 text-neutral-800 mr-1" />
-            BookMyDoc welcomes you...
+            <BriefcaseMedical className="fill-[#EEBDE0] stroke-1 text-neutral-800 mr-1" />
+            BookMyDoc Welcomes You...
           </Badge>
 
           <div className="flex flex-col justify-center items-center text-center pt-16 pb-4 px-4">
-            <h3 className="text-4xl font-bold tracking-tight opacity-85">
-              All doctors...
+            <h3 className="text-4xl font-bold text-center tracking-tight opacity-85">
+              All Doctors...
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-center text-muted-foreground">
               Get in touch with the best doctors here...
             </p>
           </div>
