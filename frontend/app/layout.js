@@ -15,9 +15,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "BookMyDoc",
+  title: "LawConnect",
   description:
-    "At BookMyDoc, our first priority is delivering outstanding service. We're dedicated to making healthcare appointments effortless and efficient.",
+    "At LawConnect, our first priority is delivering outstanding service. We're dedicated to making healthcare appointments effortless and efficient.",
 };
 
 export default function RootLayout({ children }) {

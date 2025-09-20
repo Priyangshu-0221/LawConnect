@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@500&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 * {
-  font-family: "Merriweather", serif;
+  font-family: "Mozilla Headline", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
@@ -14,15 +14,15 @@
 ::-webkit-scrollbar {
   @apply hidden;
 }
-
-
-
-video {
+body{
+  background-color: #f7f7f7;
+}
+/* video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-}
+} */
 
 nav {
   margin: 0;

@@ -11,10 +11,10 @@ const HomePage = () => {
           Your Way&quot;
         </h1>
         <p className="text-2xl mt-3">
-          &quot;Effortless Appointments, Better Health&quot;
+          &quot;Your Gateway to Trusted Legal Counsel&quot;
         </p>
-        <Link href="/doctors">
-          <button className="bg-blue-950 cursor-pointer text-lg h-10 my-4 rounded-full md:w-[25%] px-5 text-white">
+        <Link href="/lawyers">
+          <button className="bg-indigo-700 cursor-pointer text-lg h-10 my-4 rounded-full md:w-[25%] px-5 text-white">
             Book Appointment{"  "}
             <DoubleArrowIcon />
           </button>
@@ -22,7 +22,7 @@ const HomePage = () => {
       </div>
       <div className="md:w-screen md:h-180 sm:w-screen sm:h-[500px] overflow-hidden  flex justify-center items-center">
         <video
-          src="veed.mp4"
+          src="/add.mp4"
           className="px-5 overflow-hidden rounded-4xl h-fit"
           autoPlay
           loop

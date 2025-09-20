@@ -55,15 +55,15 @@ export const CardCarousel = ({
             className="absolute left-4 top-4 rounded-[14px] border border-black/10 text-base md:left-6"
           >
             <BriefcaseMedical className="fill-[#EEBDE0] stroke-1 text-neutral-800 mr-1" />
-            BookMyDoc Welcomes You...
+            LawConnect Welcomes You...
           </Badge>
 
           <div className="flex flex-col justify-center items-center text-center pt-16 pb-4 px-4">
             <h3 className="text-4xl font-bold text-center tracking-tight opacity-85">
-              All Doctors...
+              All Lawyers...
             </h3>
             <p className="text-sm text-center text-muted-foreground">
-              Get in touch with the best doctors here...
+              Get in touch with the best Lawyers here...
             </p>
           </div>
 
@@ -97,15 +97,14 @@ export const CardCarousel = ({
                 }
                 modules={[EffectCoverflow, Autoplay, Pagination, Navigation]}
               >
-                {images.map((doctor, index) => (
+                {images.map((lawyer, index) => (
                   <SwiperSlide key={index}>
                     <div className="bg-blue-900 p-4 rounded-3xl text-white text-center cursor-pointer hover:scale-105 transition-transform duration-300 shadow-lg">
                       <img
-                        src={`/doctors/${doctor.image}`}
-                        onError={(e) => (e.currentTarget.src = "/fallback.jpg")}
+                        src={`${lawyer.image}`}
                         width={300}
                         height={300}
-                        alt={doctor.name}
+                        alt={lawyer.name}
                         className="rounded-2xl object-cover w-full h-[300px]"
                         onContextMenu={(e) => e.preventDefault()}
                       />
@@ -113,9 +112,9 @@ export const CardCarousel = ({
                         <p className="bg-green-500 inline-flex items-center gap-1 px-2 py-1 rounded-md mb-1 text-sm font-medium">
                           <Clock size={16} /> Available
                         </p>
-                        <h1 className="font-bold text-xl">{doctor.name}</h1>
-                        <p>{doctor.experience}</p>
-                        <p>{doctor.speciality}</p>
+                        <h1 className="font-bold text-xl">{lawyer.name}</h1>
+                        <p>{lawyer.experience}</p>
+                        <p>{lawyer.speciality}</p>
                       </div>
                     </div>
                   </SwiperSlide>

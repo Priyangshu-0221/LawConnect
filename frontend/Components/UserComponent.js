@@ -29,7 +29,7 @@ const UserComponent = () => {
       try {
         if (userRole === "patient") {
           const res = await axios.get(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/patient/profile`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/client/profile`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -58,7 +58,7 @@ const UserComponent = () => {
     setIsUpdating(true);
     try {
       const res = await axios.patch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/patient/profile/update`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/client/profile/update`,
         {
           phone,
           address,
@@ -88,7 +88,7 @@ const UserComponent = () => {
           <Card className="shadow-md">
             <CardHeader className="flex flex-col items-center gap-2">
               <Avatar className="w-20 h-20">
-                <AvatarImage src="user.png" alt="Profile" />
+                <AvatarImage src="/user.png" alt="Profile" />
                 <AvatarFallback></AvatarFallback>
               </Avatar>
               <h2 className="text-xl font-semibold tracking-tight">

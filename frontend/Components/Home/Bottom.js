@@ -1,19 +1,21 @@
 import Link from "next/link";
 import React from "react";
-import CreateIcon from "@mui/icons-material/Create";
-import Image from "next/image";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
 const Bottom = () => {
   return (
     <>
       <div className="flex px-12 text-black rounded-4xl  my-3         items-center justify-center w-[100%] h-[80%] sm:w-screen  backdrop-blur-3xl">
         <div className="w-full flex items-center justify-center">
-          <Image
+          <video
+            autoPlay
+            muted
+            loop
             height={300}
             width={300}
-            src="/bottom.png"
+            src="/bottom.mp4"
             alt=""
-            className="rounded-3xl object-cover
-               w-full max-w-[90%]
+            className="rounded-3xl                w-full max-w-[90%]
                sm:max-w-[320px] sm:h-auto
                md:max-w-[80%]"
           />
@@ -21,9 +23,9 @@ const Bottom = () => {
       </div>
       <div className="px-[25%]">
         <Link href="/signup">
-          <button className="bg-blue-700 cursor-pointer text-white h-12 w-full px-5 rounded-full">
+          <button className="bg-indigo-700 text-xl cursor-pointer text-white h-12 w-full px-5 rounded-full">
             Create Account{"   "}
-            <CreateIcon />
+            <ArrowOutwardIcon />
           </button>
         </Link>
       </div>

@@ -6,22 +6,22 @@ import { toast } from "react-toastify";
 export const AppContext = createContext();
 
 const DoctorContextProvider = ({ children }) => {
-  const [doctors, setDoctors] = useState([]);
+  const [lawyers, setLawyers] = useState([]);
 
-  const allDoctors = async () => {
+  const allLawyers = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/doctor/alldoctors`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/lawyer/alllawyers`
       );
       console.log(data);
-      setDoctors(data);
+      setLawyers(data);
     } catch (err) {
       toast.error(err.message);
     }
   };
   const value = {
-    doctors,
-    allDoctors,
+    lawyers,
+    allLawyers,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

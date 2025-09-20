@@ -1,157 +1,221 @@
-export const doctors = [
-  // Dermatologists
+export const lawyers = [
+  // Criminal Law
   {
-    _id: "doc1",
-    name: "Dr. Nikhil Sharma",
-    image: "/doctors/nikhil.png",
-    speciality: "Dermatologist",
-    degree: "MBBS, MD (Dermatology)",
+    _id: "law1",
+    name: "Adv. Nikhil Sharma",
+    image: "/lawyers/nikhil.png",
+    speciality: "Criminal Law",
+    degree: "LLB, LLM (Criminal Justice)",
     experience: "8 Years",
     about:
-      "Dr. Sharma is known for his patient-focused skin care, specializing in chronic and cosmetic dermatology for all ages.",
-    fees: 700,
+      "Advocate Sharma specializes in criminal defense and prosecution, known for his strategic courtroom presence and commitment to justice.",
+    fees: 1500,
     address: {
-      line1: "23, MG Road",
-      line2: "Bangalore, Karnataka, India",
-    },
-  },
-  {
-    _id: "doc6",
-    name: "Dr. Ananya Gupta",
-    image: "/doctors/ananya.png",
-    speciality: "Dermatologist",
-    degree: "MBBS, MD (Dermatology, Venereology & Leprosy)",
-    experience: "5 Years",
-    about:
-      "Dr. Gupta is a young and dynamic dermatologist with a keen interest in aesthetic dermatology and laser treatments.",
-    fees: 650,
-    address: {
-      line1: "5B, Koregaon Park",
-      line2: "Pune, Maharashtra, India",
-    },
-  },
-  // Neurologists
-  {
-    _id: "doc2",
-    name: "Dr. Priya Reddy",
-    image: "/doctors/priya.png",
-    speciality: "Neurologist",
-    degree: "MBBS, DM (Neurology)",
-    experience: "11 Years",
-    about:
-      "Dr. Reddy handles neuro cases including epilepsy, stroke, and migraines. She believes in holistic and compassionate care.",
-    fees: 900,
-    address: {
-      line1: "15, Banjara Hills",
-      line2: "Hyderabad, Telangana, India",
-    },
-  },
-  {
-    _id: "doc7",
-    name: "Dr. Vikram Rathore",
-    image: "/doctors/vikram.png",
-    speciality: "Neurologist",
-    degree: "MBBS, MD (General Medicine), DM (Neurology)",
-    experience: "13 Years",
-    about:
-      "Dr. Rathore is a seasoned neurologist, specializing in movement disorders and deep brain stimulation.",
-    fees: 1100,
-    address: {
-      line1: "Plot 42, Sector 29",
-      line2: "Gurgaon, Haryana, India",
-    },
-  },
-  // Gastroenterologists
-  {
-    _id: "doc3",
-    name: "Dr. Sanjay Mehta",
-    image: "/doctors/sanjay.png",
-    speciality: "Gastroenterologist",
-    degree: "MBBS, MD, DM (Gastroenterology)",
-    experience: "14 Years",
-    about:
-      "Dr. Mehta is an expert in treating various digestive and liver disorders, with a focus on minimally invasive procedures.",
-    fees: 800,
-    address: {
-      line1: "88, Park Street",
+      line1: "15, Park Street",
       line2: "Kolkata, West Bengal, India",
     },
+    achievements: [
+      "Successfully handled over 100 criminal cases with a high success rate.",
+      "Awarded 'Best Young Criminal Lawyer' by the West Bengal Bar Association (2022).",
+    ],
+    languages: ["English", "Hindi", "Bengali"],
+    professional_memberships: ["Bar Council of India", "Calcutta High Court Bar Association"],
   },
   {
-    _id: "doc8",
-    name: "Dr. Sunita Agarwal",
-    image: "/doctors/sunita.png",
-    speciality: "Gastroenterologist",
-    degree: "MBBS, MS (General Surgery), MCh (Surgical Gastroenterology)",
-    experience: "18 Years",
-    about:
-      "Dr. Agarwal is a renowned gastrointestinal surgeon with expertise in complex liver and pancreatic surgeries.",
-    fees: 1200,
-    address: {
-      line1: "10, Greams Road",
-      line2: "Chennai, Tamil Nadu, India",
-    },
-  },
-  // Pediatricians
-  {
-    _id: "doc4",
-    name: "Dr. Aisha Khan",
-    image: "/doctors/aisha.png",
-    speciality: "Pediatrician",
-    degree: "MBBS, MD (Pediatrics)",
+    _id: "law2",
+    name: "Adv. Meera Joshi",
+    image: "/lawyers/meera.png",
+    speciality: "Criminal Law",
+    degree: "LLB, Diploma in Forensic Law",
     experience: "6 Years",
     about:
-      "Dr. Khan provides comprehensive pediatric care from newborns to adolescents, with a gentle and friendly approach.",
-    fees: 600,
+      "Adv. Joshi handles complex criminal cases with a focus on forensic evidence and victim advocacy.",
+    fees: 1300,
     address: {
-      line1: "112, Laxmi Nagar",
-      line2: "New Delhi, Delhi, India",
-    },
-  },
-  {
-    _id: "doc9",
-    name: "Dr. Aarav Singh",
-    image: "/doctors/aarav.png",
-    speciality: "Pediatrician",
-    degree: "MBBS, DNB (Pediatrics)",
-    experience: "9 Years",
-    about:
-      "Dr. Singh is a compassionate pediatrician focused on child nutrition and developmental pediatrics.",
-    fees: 750,
-    address: {
-      line1: "C-Scheme, Ashok Marg",
-      line2: "Jaipur, Rajasthan, India",
-    },
-  },
-  // Cardiologists
-  {
-    _id: "doc5",
-    name: "Dr. Rohan Patel",
-    image: "/doctors/rohan.png",
-    speciality: "Cardiologist",
-    degree: "MBBS, MD, DM (Cardiology)",
-    experience: "10 Years",
-    about:
-      "Dr. Patel is a leading cardiologist specializing in both preventive and interventional cardiology.",
-    fees: 1000,
-    address: {
-      line1: "7, Satellite Road",
-      line2: "Ahmedabad, Gujarat, India",
-    },
-  },
-  {
-    _id: "doc10",
-    name: "Dr. Ishanvi Sharma",
-    image: "/doctors/ishani.png",
-    speciality: "Cardiologist",
-    degree: "MBBS, MD (Medicine), DM (Cardiology)",
-    experience: "12 Years",
-    about:
-      "Dr. Sharma is an interventional cardiologist known for her expertise in angioplasty and stenting procedures.",
-    fees: 1050,
-    address: {
-      line1: "21, Alipore Road",
+      line1: "7, Elgin Road",
       line2: "Kolkata, West Bengal, India",
     },
+    achievements: [
+      "Secured justice in multiple domestic violence and cybercrime cases.",
+      "Frequent speaker at legal seminars on forensic law in West Bengal.",
+    ],
+    languages: ["English", "Bengali", "Hindi"],
+    professional_memberships: ["Bar Council of West Bengal", "All India Federation of Women Lawyers"],
+  },
+
+  // Civil Litigation
+  {
+    _id: "law3",
+    name: "Adv. Priya Reddy",
+    image: "/lawyers/priya.png",
+    speciality: "Civil Litigation",
+    degree: "LLB, LLM (Civil Procedure)",
+    experience: "11 Years",
+    about:
+      "Adv. Reddy is a seasoned litigator resolving disputes in property, contracts, and torts with a focus on mediation and trial strategy.",
+    fees: 1600,
+    address: {
+      line1: "99, Sarat Bose Road",
+      line2: "Kolkata, West Bengal, India",
+    },
+    achievements: [
+      "Successfully resolved large-scale property disputes through mediation.",
+      "Authored a widely-cited paper on the new Civil Procedure Code amendments.",
+    ],
+    languages: ["English", "Bengali", "Telugu"],
+    professional_memberships: ["West Bengal Bar Association", "Indian Council of Arbitration"],
+  },
+  {
+    _id: "law4",
+    name: "Adv. Vikram Rathore",
+    image: "/lawyers/vikram.png",
+    speciality: "Civil Litigation",
+    degree: "LLB, LLM (Dispute Resolution)",
+    experience: "13 Years",
+    about:
+      "Adv. Rathore is known for his expertise in high-stakes civil cases and arbitration proceedings.",
+    fees: 1700,
+    address: {
+      line1: "1, Salt Lake City, Sector 5",
+      line2: "Kolkata, West Bengal, India",
+    },
+    achievements: [
+      "Represented major corporations in multi-million dollar arbitration cases.",
+      "Recognized by legal journals for expertise in alternative dispute resolution.",
+    ],
+    languages: ["English", "Hindi", "Bengali"],
+    professional_memberships: ["Bar Council of India", "Kolkata Centre for Arbitration"],
+  },
+
+  // Corporate Law
+  {
+    _id: "law5",
+    name: "Adv. Sanjay Mehta",
+    image: "/lawyers/sanjay.png",
+    speciality: "Corporate Law",
+    degree: "LLB, LLM (Corporate & Financial Law)",
+    experience: "14 Years",
+    about:
+      "Adv. Mehta advises startups and enterprises on mergers, governance, and regulatory compliance.",
+    fees: 1800,
+    address: {
+      line1: "21, Dalhousie Square",
+      line2: "Kolkata, West Bengal, India",
+    },
+    achievements: [
+      "Facilitated successful IPOs for two prominent West Bengal-based tech companies.",
+      "Consultant for the Bengal Chamber of Commerce and Industry.",
+    ],
+    languages: ["English", "Hindi", "Bengali"],
+    professional_memberships: ["Bar Council of West Bengal", "Federation of Indian Corporate Lawyers"],
+  },
+  {
+    _id: "law6",
+    name: "Adv. Sunita Agarwal",
+    image: "/lawyers/sunita.png",
+    speciality: "Corporate Law",
+    degree: "LLB, CS, LLM (Business Law)",
+    experience: "18 Years",
+    about:
+      "Adv. Agarwal is a corporate law expert with deep experience in IPOs, M&A, and board advisory.",
+    fees: 2000,
+    address: {
+      line1: "42, Greams Road",
+      line2: "Kolkata, West Bengal, India",
+    },
+    achievements: [
+      "Led legal teams in several high-value merger and acquisition deals.",
+      "Mentor for aspiring corporate lawyers at the Indian Institute of Corporate Affairs.",
+    ],
+    languages: ["English", "Hindi", "Bengali"],
+    professional_memberships: ["Bar Council of India", "Indian Corporate Counsel Association"],
+  },
+
+  // Contract Law
+  {
+    _id: "law7",
+    name: "Adv. Aisha Khan",
+    image: "/lawyers/aisha.png",
+    speciality: "Contract Law",
+    degree: "LLB, PGD (Contract Drafting)",
+    experience: "6 Years",
+    about:
+      "Adv. Khan specializes in drafting, reviewing, and negotiating contracts with precision and clarity.",
+    fees: 1200,
+    address: {
+      line1: "11, Sarat Chatterjee Road",
+      line2: "Howrah, West Bengal, India",
+    },
+    achievements: [
+      "Provided legal counsel on over 500 commercial contracts for various businesses.",
+      "Known for expertise in international contract law and dispute resolution.",
+    ],
+    languages: ["English", "Bengali", "Urdu"],
+    professional_memberships: ["West Bengal Bar Association", "International Bar Association (IBA)"],
+  },
+  {
+    _id: "law8",
+    name: "Adv. Aarav Singh",
+    image: "/lawyers/aarav.png",
+    speciality: "Contract Law",
+    degree: "LLB, LLM (Commercial Law)",
+    experience: "9 Years",
+    about:
+      "Adv. Singh helps businesses and individuals safeguard their interests through robust contract design.",
+    fees: 1400,
+    address: {
+      line1: "C-2, Gariahat Road",
+      line2: "Kolkata, West Bengal, India",
+    },
+    achievements: [
+      "Successfully negotiated key commercial contracts for local and national clients.",
+      "Guest lecturer on contract law at a leading law college in West Bengal.",
+    ],
+    languages: ["English", "Hindi", "Bengali"],
+    professional_memberships: ["Bar Council of West Bengal", "Kolkata Lawyers' Guild"],
+  },
+
+  // Constitutional Law
+  {
+    _id: "law9",
+    name: "Adv. Rohan Patel",
+    image: "/lawyers/rohan.png",
+    speciality: "Constitutional Law",
+    degree: "LLB, LLM (Constitutional Studies)",
+    experience: "10 Years",
+    about:
+      "Adv. Patel advocates for civil liberties and constitutional rights, with experience in PILs and judicial review.",
+    fees: 1700,
+    address: {
+      line1: "1, Writers' Buildings",
+      line2: "Kolkata, West Bengal, India",
+    },
+    achievements: [
+      "Filed and argued multiple Public Interest Litigations (PILs) for public welfare.",
+      "Published articles on judicial review in national law journals.",
+    ],
+    languages: ["English", "Bengali", "Gujarati"],
+    professional_memberships: ["Calcutta High Court Bar Association", "Forum for Constitutional Studies"],
+  },
+  {
+    _id: "law10",
+    name: "Adv. Ishanvi Sharma",
+    image: "/lawyers/ishani.png",
+    speciality: "Constitutional Law",
+    degree: "LLB, LLM (Human Rights Law)",
+    experience: "12 Years",
+    about:
+      "Adv. Sharma is known for her work in constitutional litigation and advocacy for marginalized communities.",
+    fees: 1750,
+    address: {
+      line1: "34, Alipore Road",
+      line2: "Kolkata, West Bengal, India",
+    },
+    achievements: [
+      "Secured landmark judgments protecting the rights of marginalized communities.",
+      "Awarded a prestigious fellowship for her work in human rights law.",
+    ],
+    languages: ["English", "Bengali", "Hindi"],
+    professional_memberships: ["Bar Council of India", "Human Rights Law Network (HRLN)"],
   },
 ];

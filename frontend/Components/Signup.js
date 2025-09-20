@@ -18,7 +18,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const userCreated = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/patient/signup`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/client/signup`,
         {
           name,
           email,
@@ -63,9 +63,9 @@ const SignUp = () => {
           <form className="p-6 md:p-8" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="flex flex-col items-center text-center">
-                <h1 className="text-2xl font-bold">Welcome to BookMyDoc</h1>
+                <h1 className="text-2xl font-bold">Welcome to LawConnect</h1>
                 <p className="text-muted-foreground text-balance">
-                  Signup into BookMyDoc account
+                  Signup into LawConnect account
                 </p>
               </div>
               <div className="grid gap-3">
@@ -109,7 +109,7 @@ const SignUp = () => {
               <div className="text-center text-sm">
                 Already a User... {"  "}
                 <Link
-                  href="/login"
+                  href="/lawyerlogin"
                   prefetch={true}
                   className="underline underline-offset-4"
                 >

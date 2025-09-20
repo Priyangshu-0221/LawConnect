@@ -3,17 +3,16 @@ import React, { useContext, useEffect } from "react";
 import { CardCarousel } from "@/components/ui/card-carousel";
 import { AppContext } from "@/context/AppContext";
 
-
-const Doctors = () => {
-  const { doctors, allDoctors } = useContext(AppContext);
+const Lawyers = () => {
+  const { lawyers, allLawyers } = useContext(AppContext);
   useEffect(() => {
-    allDoctors();
+    allLawyers();
   }, []);
 
   return (
     <div className="py-5">
       <CardCarousel
-        images={doctors}
+        images={lawyers}
         autoplayDelay={2000}
         showPagination={true}
         showNavigation={true}
@@ -22,4 +21,4 @@ const Doctors = () => {
   );
 };
 
-export default Doctors;
+export default Lawyers;

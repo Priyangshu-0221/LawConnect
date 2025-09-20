@@ -2,6 +2,7 @@ import prisma from "../DATABASE/db.config.js";
 import { v2 as cloudinary } from "cloudinary";
 
 export const appointmentForm = async (req, res) => {
+  console.log(req.body);
   try {
     const {
       firstName,
@@ -11,50 +12,48 @@ export const appointmentForm = async (req, res) => {
       message,
       appointment,
       contactNumber,
-      doctorId,
+      lawyerId,
       userId,
-      doctorname,
+      name,
       terms,
       speciality,
     } = req.body;
 
-    const prescription = req.file;
-    //? Prescription Upload in cloudinary----------
-    const prescriptionUpload = await cloudinary.uploader.upload(
-      prescription.path,
-      {
-        resource_type: "auto",
-      }
-    );
-    const prescription_url = prescriptionUpload.secure_url;
+    const documents = req.file;
+    console.log(documents);
+    //? documents Upload in cloudinary----------
+    const documentsUpload = await cloudinary.uploader.upload(documents.path, {
+      resource_type: "auto",
+    });
+    const documents_url = documentsUpload.secure_url;
     const term = req.body.term === "true";
     const newAppointment = await prisma.appointment.create({
       data: {
-        patient_first_name: firstName,
-        patient_gender: gender,
-        patient_last_name: lastName,
-        patient_contact_number: contactNumber,
-        patient_age: parseInt(age),
-        doctor_name: doctorname,
-        doctor_speciality: speciality,
+        client_first_name: firstName,
+        client_gender: gender,
+        client_last_name: lastName,
+        client_contact_number: contactNumber,
+        client_age: parseInt(age),
+        lawyer_name: name,
+        lawyer_speciality: speciality,
         message,
         term: term,
         appointment_date_time: new Date(appointment),
-        prescription_url: prescription_url,
-        doctor: {
+        documents_url: documents_url,
+        lawyer: {
           connect: {
-            id: doctorId,
+            id: lawyerId,
           },
         },
-        patient: {
+        client: {
           connect: {
             id: userId,
           },
         },
       },
       include: {
-        patient: true,
-        doctor: true,
+        client: true,
+        lawyer: true,
       },
     });
     return res.status(200).json(newAppointment);
@@ -63,16 +62,16 @@ export const appointmentForm = async (req, res) => {
   }
 };
 
-export const patientAppointment = async (req, res) => {
-  const patientId = req.userId;
+export const clientAppointment = async (req, res) => {
+  const clientId = req.userId;
   try {
     const myappointments = await prisma.appointment.findMany({
       where: {
-        patient_id: patientId,
+        client_id: clientId,
       },
       include: {
-        doctor: true,
-        patient: true,
+        lawyer: true,
+        client: true,
       },
     });
     return res.status(200).json(myappointments);
@@ -83,17 +82,17 @@ export const patientAppointment = async (req, res) => {
 
 export const cancelAppointment = async (req, res) => {
   try {
-    if (req.userRole !== "patient") {
+    if (req.userRole !== "client") {
       return res
         .status(403)
-        .json({ message: "Access denied. Patient account required" });
+        .json({ message: "Access denied. client account required" });
     }
     const appointmentId = req.params.id;
-    const patientId = req.userId;
+    const clientId = req.userId;
     const deleteAppointment = await prisma.appointment.delete({
       where: {
         id: parseInt(appointmentId),
-        patient_id: patientId,
+        client_id: clientId,
       },
     });
     if (deleteAppointment.count === 0) {

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 
 const page = () => {
@@ -10,39 +9,39 @@ const page = () => {
       </div>
       <div className="w-full sm:flex sm:flex-col md:flex md:flex-row  sm:w-screen justify-between items-center gap-5 px-10 my-10">
         <div className="text-justify md:w-[100%] mt-3 flex justify-center sm:w-[100%] ">
-          <Image
-            height={300}
-            width={300}
-            src="/about.png"
-            alt="about"
+          <video
+            src="/about.mp4"
+            loop
+            muted
+            autoPlay
             className="h-100 w-[100%]"
+            alt="about"
           />
         </div>
         <div className="text-justify text-gray-700 text-lg w-[100%] mt-3">
           <p>
-            Welcome to BookMyDoc, your premier destination for booking doctor
-            appointments with ease and confidence. At BookMyDoc, we recognize
-            the importance of timely medical care and the difficulties that can
-            come with scheduling appointments and accessing your healthcare
-            information.
+            Welcome to LawConnect, your premier destination for connecting with
+            trusted legal professionals. At LawConnect, we recognize the
+            importance of timely legal guidance and the challenges that can come
+            with finding the right lawyer.
           </p>
           <br />
           <p>
-            BookMyDoc is dedicated to simplifying your healthcare journey. We
-            are constantly working to improve our platform with the latest
+            LawConnect is dedicated to simplifying your legal journey. We are
+            constantly working to improve our platform with the latest
             technology to ensure a secure, intuitive, and top-tier user
-            experience. Whether you&apos;re scheduling a routine check-up or
-            seeking a specialist, BookMyDoc is your reliable partner for all
-            your appointment needs.
+            experience. Whether you&apos;re seeking advice on a specific legal
+            issue or need representation, LawConnect is your reliable partner
+            for all your legal needs.
           </p>
           <br />
           <h4 className="text-black text-center">Our Vision</h4>
           <p>
-            Our vision at BookMyDoc is to build a world where booking a
-            doctor&apos;s appointment is simple and instantaneous for everyone.
-            We strive to eliminate the barriers between patients and doctors,
-            ensuring you can find and schedule the care you need, right when you
-            need it.
+            Our vision at LawConnect is to build a world where accessing legal
+            representation is simple and instantaneous for everyone. We strive
+            to eliminate the barriers between individuals and legal
+            professionals, ensuring you can find and connect with the right
+            lawyer, right when you need them.
           </p>
         </div>
       </div>
@@ -51,25 +50,26 @@ const page = () => {
           <h1 className="text-3xl font-semibold">WHY CHOOSE US</h1>
         </div>
         <div className="md:flex md:flex-row items-center justify-center gap-2 px-5 sm:flex sm:flex-col sm: ">
-          <div className="h-50 w-full bg-gray-300 rounded px-4 text-center cursor-pointer text-lg  hover:text-white border-1 hover:border-0 border-black hover:bg-blue-500 ">
+          <div className="h-50 w-full md:bg-gray-300 rounded px-4 text-center cursor-pointer text-lg  hover:text-black border-1 hover:border-0 border-black hover:bg-yellow-500 ">
             <h1 className="mb-5 py-5">EFFICIENCY:</h1>
             <p>
               Streamlined appointment scheduling that fits into your busy
               lifestyle.
             </p>
           </div>
-          <div className="h-50 w-full bg-gray-300 rounded px-4 text-center cursor-pointer text-lg  hover:text-white border-1 hover:border-0 border-black hover:bg-blue-500 ">
+          <div className="h-50 w-full md:bg-gray-300 rounded px-4 text-center cursor-pointer text-lg  hover:text-black border-1 hover:border-0 border-black hover:bg-yellow-500 ">
             <h1 className="mb-5 py-5">CONVENIENCE:</h1>
             <p>
-              Access to a network of trusted healthcare professionals in your
-              area.
+              Connect with a local network of experienced lawyers who can
+              provide personalized support and advocacy
             </p>
           </div>
-          <div className="h-50 w-full bg-gray-300 rounded px-4 text-center cursor-pointer text-lg  hover:text-white border-1 hover:border-0 border-black hover:bg-blue-500 ">
+          <div className="h-50 w-full md:bg-gray-300 rounded px-4 text-center cursor-pointer text-lg  hover:text-black border-1 hover:border-0 border-black hover:bg-yellow-500 ">
             <h1 className="mb-5 py-5">PERSONALIZATION:</h1>
             <p>
-              Tailored recommendations and reminders to help you stay on top of
-              your health.
+              Personalized legal guidance and reminders to help you stay on top
+              of your case, ensuring you receive the best possible support and
+              representation
             </p>
           </div>
         </div>

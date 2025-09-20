@@ -56,11 +56,11 @@ const MyAppointments = () => {
     <div className="py-5 flex flex-col">
       <div className="text-center py-2">
         <h1 className="text-5xl mb-4">Hiii, User</h1>
-        <h3 className="text-3xl">My Appointments</h3>
+        <h3 className="text-3xl underline">My Appointments</h3>
       </div>
 
       {myappointments.length === 0 ? (
-        <p className="text-center text-gray-500">No appointments found.</p>
+        <div className="flex items-center justify-center h-screen w-screen"><p className="text-center text-5xl text-gray-500">No appointments found...... 🥲🥲🥲</p></div>
       ) : (
         myappointments.map((appointment, index) => (
           <div

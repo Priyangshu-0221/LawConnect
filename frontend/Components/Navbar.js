@@ -1,12 +1,12 @@
 "use client";
 import Link from "next/link";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import MedicalServicesIcon from "@mui/icons-material/MedicalServices";
-import AccessibleIcon from "@mui/icons-material/Accessible";
+import GavelIcon from '@mui/icons-material/Gavel';
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import Image from "next/image";
 import axios from "axios";
 
@@ -21,11 +21,11 @@ const Navbar = () => {
     setRole(userRole);
     setToken(token);
 
-    if (token && userRole === "patient") {
+    if (token && userRole === "client") {
       const fetchProfile = async () => {
         try {
           const user = await axios.get(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/patient/profile`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/client/profile`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -48,7 +48,7 @@ const Navbar = () => {
   }, [userId]);
 
   const logout = () => {
-    if (role === "patient") {
+    if (role === "client") {
       localStorage.removeItem("token");
       localStorage.removeItem("user_role");
     }
@@ -56,7 +56,7 @@ const Navbar = () => {
   };
 
   const docLogout = () => {
-    if (role === "doctor") {
+    if (role === "lawyer") {
       localStorage.removeItem("token");
       localStorage.removeItem("user_role");
     }
@@ -68,41 +68,41 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#0A2342] w-full px-8 h-20 flex flex-row justify-between items-center text-white">
+    <nav className="bg-[#d4af37] w-full px-8 h-20 flex flex-row sm:justify-between md:justify-evenly items-center text-black font-semibold">
       <Link href="/" prefetch={true}>
         <div className="flex items-center justify-start ">
           <Image
             height={300}
             width={300}
-            src="/weblogo.png"
+            src="/logo.png"
             alt="logo"
             className="h-15 rounded-full w-15 mx-2 my-auto"
           />
-          <span className="text-xl font-semibold">BookMyDoc</span>
+          <span className="text-xl font-semibold">LawConnect</span>
         </div>
       </Link>
       <ul className="hidden sm:flex gap-4 text-lg font-semibold">
         <Link href="/" prefetch={true}>
-          <li>Home</li>
+          <li className="hover:border-b-2 hover:border-black">HOME</li>
         </Link>
-        <Link href="/doctors" prefetch={true}>
-          <li>All Doctors</li>
+        <Link href="/lawyers" prefetch={true}>
+          <li className="hover:border-b-2 hover:border-black">ALL LAWYERS</li>
         </Link>
         <Link href="/about">
-          <li>About</li>
+          <li className="hover:border-b-2 hover:border-black">ABOUT</li>
         </Link>
         <Link href="/contact">
-          <li>Contact</li>
+          <li className="hover:border-b-2 hover:border-black">CONTACT</li>
         </Link>
-        {role === "patient" ? (
+        {role === "client" ? (
           <></>
         ) : (
-          <Link href="/doctorlogin">
+          <Link href="/lawyerlogin">
             <button className="w-full bg-red-600 text-white h-9 text-center font-bold px-3 rounded-full">
               <span className="mr-1">
-                <MedicalServicesIcon fontSize="large" />
+                <GavelIcon fontSize="large" />
               </span>
-              Doctor Login
+              LAWYER LOGIN
             </button>
           </Link>
         )}
@@ -115,24 +115,24 @@ const Navbar = () => {
               <div className="text-center absolute top-0 right-0 py-14 h-[25%] w-[400px] text-base font-medium text-black z-0 hidden group-hover:block">
                 <div className="w-full  bg-gray-500 back cursor-pointer text-white py-10 h-30 items-center justify-center font-medium flex flex-col gap-y-4 px-4">
                   <Link href={`/user/${userId}`}>
-                    <p>My Profile</p>
+                    <p>MY PROFILE</p>
                   </Link>
                   <Link href={`/myappointment/${userId}`}>
-                    <p>My Appointments</p>
+                    <p>MY APPOINTMENTS</p>
                   </Link>
-                  {role === "patient" ? (
+                  {role === "client" ? (
                     <p
                       className="bg-red-500 w-[50%] text-white rounded-4xl"
                       onClick={logout}
                     >
-                      Patient Logout
+                      CLIENT LOGOUT
                     </p>
                   ) : (
                     <p
                       className="bg-red-500 w-[50%] text-white rounded-4xl"
                       onClick={docLogout}
                     >
-                      Doctor Logout
+                      LAWYER LOGOUT
                     </p>
                   )}
                 </div>
@@ -141,11 +141,11 @@ const Navbar = () => {
           </div>
         ) : (
           <Link href="/login">
-            <button className="w-full bg-green-600 h-9 text-center font-bold  hover:cursor-pointer px-3 rounded-full">
+            <button className="w-full text-white bg-green-700 h-9 text-center font-bold  hover:cursor-pointer px-3 rounded-full">
               <span className="mr-1">
-                <AccessibleIcon />
+                <AssignmentIndIcon fontSize="large" />
               </span>
-              Patient Login
+              LOGIN
             </button>
           </Link>
         )}
@@ -165,8 +165,8 @@ const Navbar = () => {
           <Link href="/">
             <li>Home</li>
           </Link>
-          <Link href="/doctors" prefetch={true}>
-            <li>All Doctors</li>
+          <Link href="/lawyers" prefetch={true}>
+            <li>All Lawyers</li>
           </Link>
           <Link href="/about">
             <li>About</li>
@@ -202,21 +202,21 @@ const Navbar = () => {
             <Link href="/login">
               <button className="w-full bg-green-600 text-white hover:cursor-pointer h-9 text-center font-bold px-3 rounded-full">
                 <span className="mr-1">
-                  <AccessibleIcon fontSize="large" />
+                  <AssignmentIndIcon fontSize="large" />
                 </span>
                 Patient Login
               </button>
             </Link>
           )}
-          {role === "patient" ? (
+          {role === "client" ? (
             <></>
           ) : (
-            <Link href="/doctorlogin">
+            <Link href="/lawyerlogin">
               <button className="w-full bg-red-600 text-white h-9 text-center font-bold px-3 rounded-full">
                 <span className="mr-1">
-                  <MedicalServicesIcon fontSize="large" />
+                  <GavelIcon fontSize="large" />
                 </span>
-                Doctor Login
+                Lawyer Login
               </button>
             </Link>
           )}

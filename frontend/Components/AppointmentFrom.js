@@ -12,13 +12,13 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const AppointmentForm = ({ doctorId, userId, name, speciality }) => {
+const AppointmentForm = ({ lawyerId, userId, name, speciality }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [gender, setGender] = useState("male");
-  const [prescription, setPrescription] = useState(null);
+  const [documents, setDocuments] = useState(null);
   const [appointment, setAppointment] = useState(
     new Date().toISOString().slice(0, 16)
   );
@@ -38,11 +38,11 @@ const AppointmentForm = ({ doctorId, userId, name, speciality }) => {
       formData.append("age", age);
       formData.append("contactNumber", contactNumber);
       formData.append("gender", gender);
-      formData.append("prescription", prescription);
+      formData.append("documents", documents);
       formData.append("appointment", appointment);
       formData.append("message", message);
-      formData.append("doctorname", name);
-      formData.append("doctorId", doctorId);
+      formData.append("name", name);
+      formData.append("lawyerId", lawyerId);
       formData.append("userId", userId?.toString());
       formData.append("speciality", speciality);
       formData.append("term", terms.toString());
@@ -64,7 +64,7 @@ const AppointmentForm = ({ doctorId, userId, name, speciality }) => {
       setAge("");
       setContactNumber("");
       setGender("male");
-      setPrescription(null);
+      setDocuments(null);
       setAppointment(new Date().toISOString().slice(0, 16));
       setMessage("");
       setTerms(false);
@@ -91,13 +91,13 @@ const AppointmentForm = ({ doctorId, userId, name, speciality }) => {
             >
               <div className="flex w-full flex-col gap-6">
                 <div className="flex flex-col items-center text-center">
-                  <div className="flex flex-row items-center">
+                  <div className="sm:flex md:flex-row sm:flex-col md:flex items-center">
                     <Image
                       height={300}
                       width={300}
-                      src="/weblogo.png"
+                      src="/logo.png"
                       alt="logo"
-                      className="h-20 w-20 mx-2 my-auto rounded-full"
+                      className="md:h-20 sm:h-auto md:w-20 sm:w-[25%] mx-2 my-auto rounded-full"
                     />
                     <h1 className="text-5xl font-bold">
                       Book Your Appointment
@@ -188,16 +188,16 @@ const AppointmentForm = ({ doctorId, userId, name, speciality }) => {
                 </RadioGroup>
 
                 <div className="grid gap-3">
-                  <Label htmlFor="doctorname" className="text-lg">
-                    Doctor&apos;s Name
+                  <Label htmlFor="Lawyername" className="text-lg">
+                    Lawyer&apos;s Name
                   </Label>
                   <Input
-                    id="doctorname"
-                    name="doctorname"
+                    id="Lawyername"
+                    name="Lawyername"
                     value={name || ""}
                     readOnly
                   />
-                  <input type="hidden" name="doctorId" value={doctorId} />
+                  <input type="hidden" name="lawyerId" value={lawyerId} />
                 </div>
 
                 <div className="grid gap-3">
@@ -213,18 +213,18 @@ const AppointmentForm = ({ doctorId, userId, name, speciality }) => {
                 </div>
 
                 <div className="grid gap-3">
-                  <Label htmlFor="prescription" className="text-lg">
-                    Prescription{" "}
+                  <Label htmlFor="documents" className="text-lg">
+                    Legal Documents{" "}
                     <span className="text-red-500">
                       only supported (PDF, JPG, PNG)*
                     </span>
                   </Label>
                   <Input
-                    id="prescription"
+                    id="documents"
                     type="file"
-                    name="prescription"
+                    name="documents"
                     accept=".jpg,.png,.pdf"
-                    onChange={(e) => setPrescription(e.target.files[0])}
+                    onChange={(e) => setDocuments(e.target.files[0])}
                   />
                 </div>
 

@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Patient {
+model Client {
   id           String        @id @default(cuid())
   name         String
   email        String        @unique
@@ -25,7 +25,7 @@ model Patient {
   appointments Appointment[]
 }
 
-model Doctor {
+model Lawyer {
   id           String        @id @default(cuid())
   name         String
   email        String        @unique
@@ -36,27 +36,30 @@ model Doctor {
   experience   String?
   image        String        @default("user.jpg")
   fees         Int           @default(500)
-  address      String?
+  address      Json?
   createdAt    DateTime      @default(now())
+  achievements String[]
+  languages String[]
+  professional_memberships String[]
   appointments Appointment[]
 }
 
 model Appointment {
   id                     Int      @id @default(autoincrement())
-  patient_first_name     String
-  patient_last_name      String
-  patient_contact_number String
-  patient_age            Int
-  patient_gender         String
-  doctor_name            String
-  doctor_speciality      String
-  prescription_url       String
+  client_first_name     String
+  client_last_name      String
+  client_contact_number String
+  client_age            Int
+  client_gender         String
+  lawyer_name            String
+  lawyer_speciality      String
+  documents_url       String
   appointment_date_time  DateTime
   term                   Boolean
   message                String
   created_at             DateTime @default(now())
-  doctor_id              String
-  doctor                 Doctor   @relation(fields: [doctor_id], references: [id])
-  patient_id             String
-  patient                Patient  @relation(fields: [patient_id], references: [id])
+  lawyer_id              String
+  lawyer                 Lawyer   @relation(fields: [lawyer_id], references: [id])
+  client_id              String
+  client                 Client   @relation(fields: [client_id], references: [id])
 }

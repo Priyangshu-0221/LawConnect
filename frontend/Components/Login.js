@@ -18,7 +18,7 @@ const Login = () => {
     console.log("hii");
     try {
       const loginUser = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/patient/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/client/login`,
         {
           email,
           password,
@@ -54,7 +54,7 @@ const Login = () => {
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">Welcome Back</h1>
                 <p className="text-muted-foreground text-balance">
-                  Login to your BookMyDoc account
+                  Login to your LawConnect account
                 </p>
               </div>
               <div className="grid gap-3">

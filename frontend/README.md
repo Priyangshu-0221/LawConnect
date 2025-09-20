@@ -1,10 +1,22 @@
-# 🩺 BookMyDoc Frontend
+# ⚖️ LawConnect Frontend
 
-A sleek, modern frontend for the BookMyDoc Doctor Appointment Booking System. Built with **Next.js**, **React**, and **Tailwind CSS**, this app delivers a seamless experience for patients and doctors to manage appointments, profiles, and more.
+A modern, lawyer-focused frontend for the LawConnect Appointment Booking System. Built with **Next.js**, **React**, and **Tailwind CSS**, this app lets users browse, filter, and book appointments with lawyers by speciality, with a seamless and responsive UI.
 
-[![Next.js](https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/) [![Shadcn/ui](https://img.shields.io/badge/Shadcn%2Fui-111827?style=for-the-badge)](https://ui.shadcn.com/) [![Material-UI](https://img.shields.io/badge/Material--UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Shadcn/ui](https://img.shields.io/badge/Shadcn%2Fui-111827?style=for-the-badge)](https://ui.shadcn.com/)
+[![Material-UI](https://img.shields.io/badge/Material--UI-007FFF?style=for-the-badge&logo=mui&logoColor=white)](https://mui.com/)
 
-## 📁 Folder Structure
+---
+
+## � Application Flowchart
+
+![Application Flowchart](public/Untitled%20diagram%20_%20Mermaid%20Chart-2025-07-30-144135.png)
+
+---
+
+## �📁 Folder Structure
 
 ```
 frontend/
@@ -15,22 +27,35 @@ frontend/
 │   next.config.js
 │   tailwind.config.js
 │
-├── app/                       # Next.js app directory (pages, layouts, routing)
+├── app/                       # Next.js app directory (routing, layouts, pages, dynamic routes)
+│   ├── lawyers/               # Dynamic lawyer speciality pages ([speciality]/page.js)
+│   ├── appointment/           # Appointment booking pages
+│   ├── myappointment/         # User's appointment dashboard
+│   ├── login/                 # Login page
+│   ├── register/              # Registration page
+│   ├── about/                 # About page
+│   ├── contact/               # Contact page
+│   └── ...                    # Other Next.js routes
 │
-├── components/                # Reusable React components (forms, cards, navbars, etc.)
+├── Components/                # Reusable React components
+│   ├── Home/                  # Home page and speciality UI
+│   ├── ui/                    # UI widgets (card-carousel, badge, etc.)
+│   ├── AppointmentFrom.js     # Appointment booking form
+│   ├── Navbar.js              # Navigation bar
+│   └── ...                    # Other UI components
 │
+├── context/                   # React context for global state (AppContext.js)
 ├── lib/                       # Utility functions, API helpers
-│
-├── public/                    # Static assets (images, favicon, etc.)
-│
+├── public/                    # Static assets (images, lawyer images, favicon, etc.)
+│   ├── lawyer/                # Lawyer profile images
+│   └── ...                    # Other static files
 ├── styles/                    # Global and component-specific styles
-│
 └── hooks/                     # Custom React hooks
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 1. **Install dependencies**
    ```sh
@@ -47,106 +72,64 @@ frontend/
 
 ---
 
-## 🧩 Main Components
+## 🧩 Key Features & Components
 
-- **app/**  
-  Next.js routing, layouts, and pages.
-- **components/**  
-  UI elements: forms, doctor cards, dashboards, navigation, etc.
-- **lib/**  
-  API utilities, fetchers, and helpers.
-- **hooks/**  
-  Custom React hooks for authentication, data fetching, etc.
-- **styles/**  
-  Tailwind CSS and custom styles.
-- **public/**  
-  Images, icons, and static files.
+- **Lawyer Directory & Speciality Filtering:**
+  - Browse and filter lawyers by speciality (e.g., Criminal Law, Civil Litigation, Corporate Law, etc.) using dynamic routes and context.
+  - `/lawyers` and `/lawyers/[speciality]` for listing and filtering.
+- **Lawyer Profile Images:**
+  - Each lawyer has a profile image, with robust fallback handling for missing images.
+- **Book Appointments:**
+  - Authenticated users can book appointments with lawyers directly from their profile cards or the appointment form.
+  - `/appointment/[lawyerId]` for booking.
+- **Authentication:**
+  - Secure sign-up and login for users.
+  - `/login` and `/register` routes.
+- **User Dashboard:**
+  - `/myappointment` for viewing and managing user appointments.
+- **Modern UI/UX:**
+  - Built with Tailwind CSS, Shadcn/ui, Material-UI Icons, and custom components.
+  - Responsive design for all devices.
+- **Reusable Components:**
+  - Carousels, cards, forms, navigation, and more in `/Components`.
+- **Context API:**
+  - Global state management for lawyers, appointments, and authentication in `/context/AppContext.js`.
+- **API Integration:**
+  - Uses custom hooks and utilities in `/lib` and `/hooks` for API calls and authentication.
 
 ---
 
-## 🌟 Features
+## 🌐 Main Frontend Routes
 
-- **User Authentication:**  
-  Secure sign-up and login for patients and doctors.
-- **Doctor Portal:**  
-  Dedicated login and dashboard for doctors.
-- **Find Doctors:**  
-  Browse and filter doctors by specialty.
-- **Book Appointments:**  
-  Intuitive form for booking, including prescription upload.
-- **Patient Dashboard:**  
-  View and manage your appointments.
-- **Responsive Design:**  
-  Fully optimized for desktop and mobile.
-- **Modern UI:**  
-  Built with Tailwind CSS, Shadcn/ui, and Material-UI Icons.
+- `/` — Home page
+- `/lawyers` — All lawyers
+- `/lawyers/[speciality]` — Filtered lawyers by speciality
+- `/appointment/[lawyerId]` — Book appointment with a lawyer
+- `/myappointment` — User's appointment dashboard
+- `/login` — Login
+- `/register` — Register
+- `/about` — About LawConnect
+- `/contact` — Contact/support
+- `/404` — Custom not found page
+
+> **Note:**
+> All protected routes use authentication guards (middleware or hooks) to ensure only authorized users can access dashboards and sensitive data.
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Frontend:**
-  - [Next.js](https://nextjs.org/)
-  - [React](https://react.dev/)
-  - [Tailwind CSS](https://tailwindcss.com/)
-  - [Shadcn/ui](https://ui.shadcn.com/)
-  - [Material-UI Icons](https://mui.com/material-ui/material-icons/)
-
-
----
-
-## 🌐 Frontend Routes
-
-Below are the main routes and their purposes. All routes are managed via the Next.js `app/` directory.
-
-### **Public Routes**
-- `/`  
-  Home page with landing info and navigation.
-- `/login`  
-  Unified login page for patients and doctors.
-- `/register`  
-  Unified registration page for new users.
-- `/doctors`  
-  Browse and filter doctors by specialty, location, etc.
-- `/about`  
-  Information about BookMyDoc and its features.
-- `/contact`  
-  Contact form and support info.
-
-### **Patient Routes**
-- `/patient/dashboard`  
-  Patient dashboard with upcoming and past appointments.
-- `/patient/profile`  
-  View and update patient profile.
-- `/patient/appointments`  
-  List, view, and manage patient appointments.
-- `/patient/appointments/book`  
-  Book a new appointment (with prescription upload).
-
-### **Doctor Routes**
-- `/doctor/dashboard`  
-  Doctor dashboard with appointment management.
-- `/doctor/profile`  
-  View and update doctor profile.
-- `/doctor/appointments`  
-  List and manage all appointments for the doctor.
-- `/doctor/patients`  
-  View patient details and appointment history.
-
-### **Other/Utility Routes**
-- `/logout`  
-  Ends the user session and redirects to home/login.
-- `/404`  
-  Custom not found page.
-
-> **Note:**  
-> All protected routes use authentication guards (middleware or hooks) to ensure only authorized users can access dashboards and sensitive data.
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Shadcn/ui](https://ui.shadcn.com/)
+- [Material-UI Icons](https://mui.com/material-ui/material-icons/)
 
 ---
 
 ## 🔗 API Integration
 
-- Connects to the [BookMyDoc Backend](../backend/README.md) via RESTful APIs.
+- Connects to the [LawConnect Backend](../backend/README.md) via RESTful APIs.
 - All sensitive data and endpoints are managed via environment variables.
 - Uses custom React hooks and utility functions in `/lib` and `/hooks` for API calls and authentication.
 
@@ -155,4 +138,8 @@ Below are the main routes and their purposes. All routes are managed via the Nex
 ## 📝 License
 
 MIT
+
+---
+
+**Author:** Priyangshu
 
