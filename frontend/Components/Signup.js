@@ -29,10 +29,12 @@ const SignUp = () => {
       const token = await userCreated.data.token;
       const userId = await userCreated.data.userId;
       const userRole = await userCreated.data.role;
+      const userName = userCreated.data.name;
       console.log(token, userRole);
       localStorage.setItem("token", token);
       localStorage.setItem("user_role", userRole);
       localStorage.setItem("userId", userId);
+      localStorage.setItem("userName", userName);
       toast.success("User Created Successfully");
       if (token) {
         window.location.href = "/";

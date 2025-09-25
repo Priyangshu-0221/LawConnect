@@ -82,9 +82,12 @@ backend/
 - **Lawyer.Controller.js:**
   - Handles lawyer registration, login, profile retrieval, update, and fetching all/single lawyers.
 - **Client.Controller.js:**
+
   - Handles client registration, login, profile retrieval, update, and appointment cancellation.
 
----
+- **Review.Controller.js:**
+  - Handles adding new reviews for lawyers by clients (with authentication).
+  - Fetches all reviews for a specific lawyer.
 
 ## 🛢️ Database & ORM
 
@@ -93,7 +96,8 @@ backend/
 - **cloudinary.config.js:**
   - Configures Cloudinary for file uploads (e.g., legal documents).
 - **schema.prisma:**
-  - Defines the data models: `Client`, `Lawyer`, `Appointment`, and their relations.
+  - Defines the data models: `Client`, `Lawyer`, `Appointment`, `Review`, and their relations.
+  - `Review` model links clients and lawyers, supports ratings, descriptions, and timestamps.
 
 ---
 
@@ -126,6 +130,9 @@ backend/
   - `/api/lawyer/allappointments/:id` — Cancel appointment (auth required)
 - **appointment.Route.js:**
   - `/api/new/appointment` — Book a new appointment (auth required, file upload supported)
+- **review.Route.js:**
+  - `/api/review/addreview` — Add a review for a lawyer (client auth required)
+  - `/api/review/getreviews?lawyerId=LAWYER_ID` — Get all reviews for a lawyer
 
 ---
 

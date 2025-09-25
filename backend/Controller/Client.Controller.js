@@ -50,6 +50,7 @@ export const createclient = async (req, res) => {
         message: "New user created successfully",
         userId,
         token,
+        name: newclient.name,
         role: "client",
       });
     } catch (error) {
@@ -97,6 +98,7 @@ export const loginclient = async (req, res) => {
           message: "Login successful",
           token: token,
           userId,
+          name: existedUser.name,
           role: "client",
         });
       }
@@ -180,5 +182,4 @@ export const allAppointments = async (req, res) => {
     }
   } catch (error) {}
 };
-
 

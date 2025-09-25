@@ -27,10 +27,13 @@ const Login = () => {
       const token = await loginUser.data.token;
       const userId = await loginUser.data.userId;
       const userRole = await loginUser.data.role;
+      const username = await loginUser.data.name;
       console.log(token, userRole);
       localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
       localStorage.setItem("user_role", userRole);
+      localStorage.setItem("username", username);
+
       if (token) {
         toast.success("Login Successful");
         window.location.href = "/";

@@ -23,43 +23,57 @@ model Client {
   address      String?
   createdAt    DateTime      @default(now())
   appointments Appointment[]
+  reviews      Review[]
 }
 
 model Lawyer {
-  id           String        @id @default(cuid())
-  name         String
-  email        String        @unique
-  password     String?
-  speciality   String?
-  degree       String?
-  about        String?
-  experience   String?
-  image        String        @default("user.jpg")
-  fees         Int           @default(500)
-  address      Json?
-  createdAt    DateTime      @default(now())
-  achievements String[]
-  languages String[]
+  id                       String        @id @default(cuid())
+  name                     String
+  email                    String        @unique
+  password                 String?
+  speciality               String?
+  degree                   String?
+  about                    String?
+  experience               String
+  image                    String        @default("user.jpg")
+  fees                     Int           @default(500)
+  address                  Json?
+  createdAt                DateTime      @default(now())
+  achievements             String[]
+  languages                String[]
   professional_memberships String[]
-  appointments Appointment[]
+  appointments             Appointment[]
+  reviews                  Review[]
 }
 
 model Appointment {
-  id                     Int      @id @default(autoincrement())
+  id                    Int      @id @default(autoincrement())
   client_first_name     String
   client_last_name      String
   client_contact_number String
   client_age            Int
   client_gender         String
-  lawyer_name            String
-  lawyer_speciality      String
-  documents_url       String
-  appointment_date_time  DateTime
-  term                   Boolean
-  message                String
-  created_at             DateTime @default(now())
-  lawyer_id              String
-  lawyer                 Lawyer   @relation(fields: [lawyer_id], references: [id])
-  client_id              String
-  client                 Client   @relation(fields: [client_id], references: [id])
+  lawyer_name           String
+  lawyer_speciality     String
+  documents_url         String
+  appointment_date_time DateTime
+  term                  Boolean
+  message               String
+  created_at            DateTime @default(now())
+  lawyer_id             String
+  lawyer                Lawyer   @relation(fields: [lawyer_id], references: [id])
+  client_id             String
+  client                Client   @relation(fields: [client_id], references: [id])
+}
+
+model Review {
+  id           Int      @id @default(autoincrement())
+  username     String
+  rating       String
+  descriptions String
+  lawyer_id    String
+  lawyer       Lawyer   @relation(fields: [lawyer_id], references: [id])
+  client_id    String
+  created_at   DateTime @default(now())
+  client       Client   @relation(fields: [client_id], references: [id])
 }

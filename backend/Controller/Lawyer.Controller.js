@@ -185,7 +185,11 @@ export const singlelawyer = async (req, res) => {
 
 export const alllawyers = async (req, res) => {
   try {
-    const lawyers = await prisma.lawyer.findMany({});
+    const lawyers = await prisma.lawyer.findMany({
+      orderBy: {
+        id: "desc",
+      },
+    });
     console.log();
     if (lawyers) {
       return res.status(200).json(lawyers);
@@ -263,7 +267,10 @@ export const addAllLawyers = async (req, res) => {
         "Awarded 'Best Young Criminal Lawyer' by the West Bengal Bar Association (2022).",
       ],
       languages: ["English", "Hindi", "Bengali"],
-      professional_memberships: ["Bar Council of India", "Calcutta High Court Bar Association"],
+      professional_memberships: [
+        "Bar Council of India",
+        "Calcutta High Court Bar Association",
+      ],
       email: "nikhil.sharma@legalservice.com",
     },
     {
@@ -285,10 +292,13 @@ export const addAllLawyers = async (req, res) => {
         "Frequent speaker at legal seminars on forensic law in West Bengal.",
       ],
       languages: ["English", "Bengali", "Hindi"],
-      professional_memberships: ["Bar Council of West Bengal", "All India Federation of Women Lawyers"],
+      professional_memberships: [
+        "Bar Council of West Bengal",
+        "All India Federation of Women Lawyers",
+      ],
       email: "meera.joshi@legalservice.com",
     },
-  
+
     // Civil Litigation
     {
       _id: "law3",
@@ -309,7 +319,10 @@ export const addAllLawyers = async (req, res) => {
         "Authored a widely-cited paper on the new Civil Procedure Code amendments.",
       ],
       languages: ["English", "Bengali", "Telugu"],
-      professional_memberships: ["West Bengal Bar Association", "Indian Council of Arbitration"],
+      professional_memberships: [
+        "West Bengal Bar Association",
+        "Indian Council of Arbitration",
+      ],
       email: "priya.reddy@legalservice.com",
     },
     {
@@ -331,10 +344,13 @@ export const addAllLawyers = async (req, res) => {
         "Recognized by legal journals for expertise in alternative dispute resolution.",
       ],
       languages: ["English", "Hindi", "Bengali"],
-      professional_memberships: ["Bar Council of India", "Kolkata Centre for Arbitration"],
+      professional_memberships: [
+        "Bar Council of India",
+        "Kolkata Centre for Arbitration",
+      ],
       email: "vikram.rathore@legalservice.com",
     },
-  
+
     // Corporate Law
     {
       _id: "law5",
@@ -355,7 +371,10 @@ export const addAllLawyers = async (req, res) => {
         "Consultant for the Bengal Chamber of Commerce and Industry.",
       ],
       languages: ["English", "Hindi", "Bengali"],
-      professional_memberships: ["Bar Council of West Bengal", "Federation of Indian Corporate Lawyers"],
+      professional_memberships: [
+        "Bar Council of West Bengal",
+        "Federation of Indian Corporate Lawyers",
+      ],
       email: "sanjay.mehta@legalservice.com",
     },
     {
@@ -377,10 +396,13 @@ export const addAllLawyers = async (req, res) => {
         "Mentor for aspiring corporate lawyers at the Indian Institute of Corporate Affairs.",
       ],
       languages: ["English", "Hindi", "Bengali"],
-      professional_memberships: ["Bar Council of India", "Indian Corporate Counsel Association"],
+      professional_memberships: [
+        "Bar Council of India",
+        "Indian Corporate Counsel Association",
+      ],
       email: "sunita.agarwal@legalservice.com",
     },
-  
+
     // Contract Law
     {
       _id: "law7",
@@ -401,7 +423,10 @@ export const addAllLawyers = async (req, res) => {
         "Known for expertise in international contract law and dispute resolution.",
       ],
       languages: ["English", "Bengali", "Urdu"],
-      professional_memberships: ["West Bengal Bar Association", "International Bar Association (IBA)"],
+      professional_memberships: [
+        "West Bengal Bar Association",
+        "International Bar Association (IBA)",
+      ],
       email: "aisha.khan@legalservice.com",
     },
     {
@@ -423,10 +448,13 @@ export const addAllLawyers = async (req, res) => {
         "Guest lecturer on contract law at a leading law college in West Bengal.",
       ],
       languages: ["English", "Hindi", "Bengali"],
-      professional_memberships: ["Bar Council of West Bengal", "Kolkata Lawyers' Guild"],
+      professional_memberships: [
+        "Bar Council of West Bengal",
+        "Kolkata Lawyers' Guild",
+      ],
       email: "aarav.singh@legalservice.com",
     },
-  
+
     // Constitutional Law
     {
       _id: "law9",
@@ -447,7 +475,10 @@ export const addAllLawyers = async (req, res) => {
         "Published articles on judicial review in national law journals.",
       ],
       languages: ["English", "Bengali", "Gujarati"],
-      professional_memberships: ["Calcutta High Court Bar Association", "Forum for Constitutional Studies"],
+      professional_memberships: [
+        "Calcutta High Court Bar Association",
+        "Forum for Constitutional Studies",
+      ],
       email: "rohan.patel@legalservice.com",
     },
     {
@@ -469,7 +500,10 @@ export const addAllLawyers = async (req, res) => {
         "Awarded a prestigious fellowship for her work in human rights law.",
       ],
       languages: ["English", "Bengali", "Hindi"],
-      professional_memberships: ["Bar Council of India", "Human Rights Law Network (HRLN)"],
+      professional_memberships: [
+        "Bar Council of India",
+        "Human Rights Law Network (HRLN)",
+      ],
       email: "ishanvi.sharma@legalservice.com",
     },
   ];

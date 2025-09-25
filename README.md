@@ -132,6 +132,18 @@ Below are some screenshots of the LawConnect platform in action:
 
 ---
 
+### Additional Features
+
+- **Review System:**
+  - Users can submit reviews for lawyers after appointments using a dedicated review form component.
+  - All reviews for a lawyer are displayed on their profile page, with ratings and feedback.
+- **Dynamic Lawyer Carousel:**
+  - The homepage features a modern, interactive carousel to showcase lawyers with images, specialities, and availability.
+- **User Dashboard:**
+  - `/user/[userId]` route provides a personalized dashboard for users, displaying their profile and relevant data.
+
+---
+
 ## 🚀 Tech Stack
 
 ### **Frontend**
@@ -198,6 +210,15 @@ LawConnect/
   - `/api/client/signup`, `/api/client/login`, `/api/client/profile`
   - `/api/lawyer/signup`, `/api/lawyer/login`, `/api/lawyer/lawyerprofile`
   - `/api/new/appointment` (with file upload)
+
+---
+
+### Additional Backend Endpoints
+
+- **Review API:**
+  - `/api/review/addreview` — Add a review for a lawyer (client auth required)
+  - `/api/review/getreviews?lawyerId=LAWYER_ID` — Get all reviews for a lawyer
+  - Review controller handles adding and fetching reviews, linking clients and lawyers.
 
 ---
 

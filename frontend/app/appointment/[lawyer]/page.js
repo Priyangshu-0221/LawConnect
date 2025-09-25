@@ -5,6 +5,9 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import AppointmentFrom from "@/Components/AppointmentFrom";
 import Image from "next/image";
 import axios from "axios";
+import { toast } from "react-toastify";
+import ReviewComponent from "@/Components/ReviewComponent";
+import ReviewFrom from "@/Components/ReviewFrom";
 
 const Page = () => {
   const params = useParams();
@@ -14,9 +17,12 @@ const Page = () => {
   const [lawInfo, setlawInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [username, setUsername] = useState(null);
+  const [bookAppointment, setbookAppointment] = useState(false);
   useEffect(() => {
     const userId = localStorage.getItem("userId");
+    const username = localStorage.getItem("username");
+    setUsername(username);
     setUserId(userId);
   }, []);
 
@@ -25,7 +31,6 @@ const Page = () => {
       setIsLoading(false);
       return;
     }
-
     const fetchlawyer = async () => {
       setIsLoading(true);
       setError(null);
@@ -123,13 +128,33 @@ const Page = () => {
         </div>
       </div>
       <div>
-        <AppointmentFrom
-          userId={userId}
-          lawyerId={lawyerId}
-          name={lawInfo?.name}
-          speciality={lawInfo?.speciality}
-        />
+        <div className="flex items-center justify-center">
+          {!bookAppointment ? (
+            <button
+              onClick={() => {
+                setbookAppointment(!bookAppointment);
+              }}
+              className="w-[50%] h-10 rounded-full cursor-pointer active:bg-blue-300 text-white x-6 bg-blue-600"
+            >
+              Book Appointment
+            </button>
+          ) : (
+            <></>
+          )}
+        </div>
+        {!bookAppointment ? (
+          <></>
+        ) : (
+          <AppointmentFrom
+            userId={userId}
+            lawyerId={lawyerId}
+            name={lawInfo?.name}
+            speciality={lawInfo?.speciality}
+          />
+        )}
       </div>
+      <ReviewComponent />
+      <ReviewFrom username={username} lawyerId={lawyerId} userId={userId} />
     </>
   );
 };

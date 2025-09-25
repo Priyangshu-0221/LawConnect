@@ -13,5 +13,6 @@ router.get("/profile", authMiddleware, singleclient);
 router.post("/signup", createclient);
 router.post("/login", loginclient);
 router.patch("/profile/update", authMiddleware, updateclient);
+router.post("/addreview", authMiddleware, );
 
 export default router;

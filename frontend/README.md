@@ -95,9 +95,16 @@ frontend/
 - **Context API:**
   - Global state management for lawyers, appointments, and authentication in `/context/AppContext.js`.
 - **API Integration:**
+
   - Uses custom hooks and utilities in `/lib` and `/hooks` for API calls and authentication.
 
----
+- **Review System:**
+  - Users can submit reviews for lawyers after appointments using a dedicated review form component.
+  - All reviews for a lawyer are displayed on their profile page, with ratings and feedback.
+- **Dynamic Lawyer Carousel:**
+  - The homepage features a modern, interactive carousel (`card-carousel.jsx`) to showcase lawyers with images, specialities, and availability.
+- **User Dashboard:**
+  - `/user/[userId]` route provides a personalized dashboard for users, displaying their profile and relevant data.
 
 ## 🌐 Main Frontend Routes
 
@@ -142,4 +149,3 @@ MIT
 ---
 
 **Author:** Priyangshu
-
