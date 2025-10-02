@@ -13,7 +13,7 @@ const HomePage = () => {
         <p className="text-2xl mt-3">
           &quot;Your Gateway to Trusted Legal Counsel&quot;
         </p>
-        <Link href="/lawyers">
+        <Link href="/all_lawyers">
           <button className="bg-indigo-700 cursor-pointer text-lg h-10 my-4 rounded-full md:w-[25%] px-5 text-white">
             Book Appointment{"  "}
             <DoubleArrowIcon />

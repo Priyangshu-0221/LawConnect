@@ -1,10 +1,10 @@
-import DoctorComponent from "@/Components/DoctorComponent";
+import LawyerComponent from "@/Components/LawyerComponent";
 import React from "react";
 
 const page = () => {
   return (
     <div>
-      <DoctorComponent />
+      <LawyerComponent />
     </div>
   );
 };

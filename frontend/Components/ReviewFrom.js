@@ -30,6 +30,7 @@ const ReviewFrom = ({ username, userId, lawyerId }) => {
         toast("Review added successfully!");
         setDescriptions("");
         setRating(null);
+        window.location.reload();
       });
   };
   return (

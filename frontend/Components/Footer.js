@@ -33,7 +33,7 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                href="/lawyers"
+                href="/all_lawyers"
                 className="hover:underline hover:scale-110 text-lg me-4 md:me-6"
               >
                 All Lawyers

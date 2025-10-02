@@ -1,324 +1,1035 @@
-# ⚖️ LawConnect — Appointment Booking Platform
+<div align="center">
 
-LawConnect is a comprehensive, production-ready web platform that connects users with qualified lawyers for legal consultations and case management. The system is designed to simplify the process of searching, filtering, and booking appointments with legal professionals, while providing a secure, user-friendly experience for both clients and lawyers.
+# 🏛️⚖️ LawConnect
 
-## 📝 Project Purpose & Vision
+### Professional Legal Consultation Platform
 
-LawConnect aims to:
+[![Next.js](https://img.shields.io/badge/Next.js-15.4.2-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19.1.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1.11-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-- **Democratize access to legal services** by making it easy for anyone to find and consult with the right lawyer for their needs.
-- **Digitize appointment management** for law firms and independent lawyers, reducing administrative overhead and missed opportunities.
-- **Provide a seamless, modern user experience** for both clients and legal professionals, with robust authentication, document management, and real-time updates.
+_A full-stack legal consultation platform connecting clients with qualified legal professionals_
 
-## 👥 User Roles & Flows
+[Live Demo](#) • [Documentation](#) • [Report Bug](#) • [Request Feature](#)
 
-### 1. Clients (Users)
-
-- Register and log in securely (JWT-based authentication)
-- Search and filter lawyers by speciality, location, or name
-- View detailed lawyer profiles, including experience, specializations, and ratings
-- Book appointments with lawyers, selecting available time slots
-- Upload legal documents or case files securely (Cloudinary integration)
-- Manage and view upcoming or past appointments in a personal dashboard
-
-### 2. Lawyers
-
-- Register and log in securely
-- Create and manage a public profile (bio, specializations, experience, profile image)
-- Set available time slots for appointments
-- View and manage all client appointments
-- Download/view client-uploaded documents
-- Update appointment status (confirmed, completed, cancelled)
-
-### 3. Admin (optional, extensible)
-
-- Monitor platform activity
-- Approve or verify lawyer registrations
-- Manage users and content
-
-## 🏢 Business Logic & Real-World Use Cases
-
-- **Legal Consultation Marketplace:** LawConnect can be used by law firms, legal startups, or independent lawyers to offer their services online, expanding their reach and improving client acquisition.
-- **Case Management:** Lawyers can use the platform to keep track of client appointments, manage case files, and communicate securely with clients.
-- **Document Handling:** Secure upload and storage of sensitive legal documents, with access controls for both parties.
-- **Notifications & Reminders:** (Extensible) Email or SMS reminders for upcoming appointments, reducing no-shows.
-- **Review & Rating System:** (Extensible) Clients can rate and review lawyers after appointments, helping others make informed choices.
-
-## 🔒 Security & Privacy
-
-- All sensitive data (passwords, JWT secrets, API keys) is stored in environment variables and never exposed in the codebase.
-- Passwords are hashed using Bcrypt before storage.
-- JWT tokens are used for stateless, secure authentication.
-- File uploads are handled via Multer and stored in Cloudinary, with strict validation and access control.
-
-## 🌐 Technology Highlights
-
-- **Backend:** Node.js, Express, Prisma ORM, PostgreSQL, JWT, Multer, Cloudinary, Bcrypt
-- **Frontend:** Next.js, React, Tailwind CSS, Shadcn/ui, Material-UI Icons
-- **API:** RESTful, with clear separation of concerns and modular controllers/routes
-- **DevOps Ready:** Easily deployable to cloud platforms (Vercel, Heroku, AWS, etc.)
+</div>
 
 ---
 
-[![Next.js](https://img.shields.io/badge/Next.js-000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/) [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/) [![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/) [![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/) [![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)](https://expressjs.com/) [![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/) [![Cloudinary](https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white)](https://cloudinary.com/) [![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)](https://jwt.io/)
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+- [Features](#-features)
+- [Technology Stack](#-technology-stack)
+- [System Architecture](#-system-architecture)
+- [Getting Started](#-getting-started)
+- [Project Structure](#-project-structure)
+- [API Documentation](#-api-documentation)
+- [Environment Configuration](#-environment-configuration)
+- [Development](#-development)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
-# 📸 Screenshots
+## 🎯 Overview
 
-Below are some screenshots of the LawConnect platform in action:
+**LawConnect** is a modern, full-stack web application designed to bridge the gap between clients seeking legal advice and qualified legal professionals. Built with cutting-edge technologies, the platform offers a seamless experience for booking legal consultations, managing appointments, and building professional relationships through a transparent review system.
 
-<table>
-  <tr>
-    <td align="center">
-      <img src="/frontend/public/ss/localhost_3000-LawConnect-fpscreenshot.png" alt="Home Page" width="300"/>
-      <br/><b>Home Page</b>
-    </td>
-    <td align="center">
-      <img src="/frontend/public/ss/localhost_3000-LawConnect-fpscreenshot (1).png" alt="Screenshot 1" width="300"/>
-      <br/><b>Lawyer List</b>
-    </td>
-    <td align="center">
-      <img src="/frontend/public/ss/localhost_3000-LawConnect-fpscreenshot (2).png" alt="Screenshot 2" width="300"/>
-      <br/><b>Appointment Booking</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <img src="/frontend/public/ss/localhost_3000-LawConnect-fpscreenshot (3).png" alt="Screenshot 3" width="300"/>
-      <br/><b>About Us</b>
-    </td>
-    <td align="center">
-      <img src="/frontend/public/ss/localhost_3000-LawConnect-fpscreenshot (4).png" alt="Screenshot 4" width="300"/>
-      <br/><b>Contact</b>
-    </td>
-    <td></td>
-  </tr>
-</table>
+### Why LawConnect?
 
----
-
-## 📚 Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Architecture & Folder Structure](#architecture--folder-structure)
-- [Backend Overview](#backend-overview)
-- [Frontend Overview](#frontend-overview)
-- [Getting Started](#getting-started)
-- [License](#license)
-- [Author](#author)
+- **🚀 Modern Tech Stack**: Built with Next.js 15, React 19, Node.js, and PostgreSQL
+- **🔐 Dual Authentication**: Separate, secure flows for clients and lawyers
+- **📱 Fully Responsive**: Optimized for mobile, tablet, and desktop devices
+- **⚡ High Performance**: Lightning-fast with Turbopack and optimized API responses
+- **🎨 Beautiful UI**: Modern interface with TailwindCSS, Material-UI, and shadcn/ui
+- **🛡️ Enterprise Security**: JWT authentication, bcrypt hashing, and role-based access control
+- **📊 Scalable Architecture**: Prisma ORM with PostgreSQL for robust data management
+- **☁️ Cloud-Ready**: Document management with Cloudinary integration
 
 ---
 
 ## ✨ Features
 
-- **Lawyer Directory & Speciality Filtering:**
-  - Browse and filter lawyers by speciality (e.g., Criminal Law, Civil Litigation, Corporate Law, etc.) using dynamic routes and context.
-- **Lawyer Profile Images:**
-  - Each lawyer has a profile image, with robust fallback handling for missing images.
-- **Book Appointments:**
-  - Authenticated users can book appointments with lawyers directly from their profile cards or the appointment form.
-- **Authentication:**
-  - Secure sign-up and login for users (JWT-based).
-- **User Dashboard:**
-  - View and manage your appointments.
-- **Modern UI/UX:**
-  - Built with Tailwind CSS, Shadcn/ui, Material-UI Icons, and custom components.
-  - Responsive design for all devices.
-- **File Uploads:**
-  - Legal documents or files can be uploaded during appointment creation and are stored in Cloudinary.
+### 🔐 Authentication & User Management
+
+#### For Clients
+
+- **Secure Registration & Login**
+  - Email validation and strong password enforcement
+  - JWT token-based authentication with 6-hour expiration
+  - Session persistence across browser sessions
+- **Profile Management**
+  - Complete profile with personal information
+  - Phone number, gender, and address fields
+  - View and update profile information
+- **Appointment History**
+  - View all past and upcoming appointments
+  - Access appointment details and documents
+  - Cancel appointments when needed
+
+#### For Lawyers
+
+- **Professional Registration**
+  - Comprehensive profile creation with credentials
+  - Specialization and practice areas
+  - Degrees, experience, and certifications
+- **Profile Showcase**
+  - Professional achievements display
+  - Language proficiencies
+  - Professional memberships
+  - Fee structure management
+  - Profile image upload with Cloudinary
+- **Appointment Management**
+  - View client appointments
+  - Access case documents
+  - Manage appointment schedule
+
+### 📅 Appointment System
+
+- **Smart Booking Interface**
+  - Browse qualified lawyers by specialization
+  - View detailed lawyer profiles
+  - Select appointment date and time
+  - Upload relevant documents securely
+  - Receive booking confirmation
+- **Document Management**
+  - Secure document upload via Multer
+  - Cloud storage with Cloudinary
+  - Easy document access for both parties
+- **Appointment Tracking**
+  - Real-time appointment status
+  - Email notifications (planned)
+  - Cancel or reschedule options
+
+### ⭐ Review & Rating System
+
+- **Transparent Reviews**
+  - Client-submitted reviews for lawyers
+  - 5-star rating system
+  - Detailed feedback descriptions
+  - Review history with timestamps
+- **Lawyer Reputation**
+  - Aggregate ratings display
+  - Review count and statistics
+  - Build trust through transparency
+
+### 🎨 User Interface
+
+- **Responsive Design**
+  - Mobile-first approach
+  - Adaptive layouts for all screen sizes
+  - Touch-friendly interfaces
+- **Modern Components**
+  - Material-UI components
+  - shadcn/ui accessible primitives
+  - Custom-designed elements
+  - Smooth animations with Framer Motion
+- **Intuitive Navigation**
+  - Sticky navigation bar
+  - Dropdown menus for user actions
+  - Breadcrumb navigation
+  - Mobile hamburger menu
 
 ---
 
-### Additional Features
+## 🛠️ Technology Stack
 
-- **Review System:**
-  - Users can submit reviews for lawyers after appointments using a dedicated review form component.
-  - All reviews for a lawyer are displayed on their profile page, with ratings and feedback.
-- **Dynamic Lawyer Carousel:**
-  - The homepage features a modern, interactive carousel to showcase lawyers with images, specialities, and availability.
-- **User Dashboard:**
-  - `/user/[userId]` route provides a personalized dashboard for users, displaying their profile and relevant data.
+### Frontend
 
----
+| Technology          | Version  | Purpose                      |
+| ------------------- | -------- | ---------------------------- |
+| **Next.js**         | 15.4.2   | React framework with SSR/SSG |
+| **React**           | 19.1.0   | UI library                   |
+| **TailwindCSS**     | 4.1.11   | Utility-first CSS framework  |
+| **Material-UI**     | 7.2.0    | Component library            |
+| **shadcn/ui**       | Latest   | Radix UI components          |
+| **Framer Motion**   | 12.23.12 | Animation library            |
+| **React Hook Form** | 7.60.0   | Form validation              |
+| **Axios**           | 1.11.0   | HTTP client                  |
+| **React Toastify**  | 11.0.5   | Notifications                |
 
-## 🚀 Tech Stack
+### Backend
 
-### **Frontend**
-
-- [Next.js](https://nextjs.org/)
-- [React](https://react.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Shadcn/ui](https://ui.shadcn.com/)
-- [Material-UI Icons](https://mui.com/material-ui/material-icons/)
-
-### **Backend**
-
-- [Node.js](https://nodejs.org/)
-- [Express](https://expressjs.com/)
-- [Prisma ORM](https://www.prisma.io/)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Cloudinary](https://cloudinary.com/)
-- [JWT](https://jwt.io/)
-- [Multer](https://github.com/expressjs/multer)
-- [Bcrypt](https://github.com/kelektiv/node.bcrypt.js/)
+| Technology       | Version  | Purpose                  |
+| ---------------- | -------- | ------------------------ |
+| **Node.js**      | Latest   | JavaScript runtime       |
+| **Express.js**   | 5.1.0    | Web framework            |
+| **Prisma**       | 6.13.0   | ORM and database toolkit |
+| **PostgreSQL**   | Latest   | Primary database         |
+| **JWT**          | 9.0.2    | Authentication tokens    |
+| **Bcrypt**       | 6.0.0    | Password hashing         |
+| **Multer**       | 2.0.2    | File upload handling     |
+| **Cloudinary**   | 2.7.0    | Cloud storage            |
+| **Validator.js** | 13.15.15 | Input validation         |
 
 ---
 
-## 🗂️ Architecture & Folder Structure
+## 🏗️ System Architecture
+
+### High-Level Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        Client Browser                        │
+│                    (React 19 + Next.js 15)                   │
+└───────────────────────────┬─────────────────────────────────┘
+                            │
+                            │ HTTPS/HTTP
+                            │
+┌───────────────────────────▼─────────────────────────────────┐
+│                     Frontend (Port 3000)                     │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  Next.js App Router                                    │ │
+│  │  • Server Components (SSR)                             │ │
+│  │  • Client Components (CSR)                             │ │
+│  │  • API Route Handlers                                  │ │
+│  └────────────────────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  UI Layer                                              │ │
+│  │  • TailwindCSS + Material-UI                          │ │
+│  │  • shadcn/ui Components                               │ │
+│  │  • Framer Motion Animations                           │ │
+│  └────────────────────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  State Management                                      │ │
+│  │  • React Context API                                   │ │
+│  │  • localStorage (Auth tokens)                         │ │
+│  └────────────────────────────────────────────────────────┘ │
+└───────────────────────────┬─────────────────────────────────┘
+                            │
+                            │ REST API Calls
+                            │ (JWT Authentication)
+                            │
+┌───────────────────────────▼─────────────────────────────────┐
+│                     Backend API (Port 8080)                  │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  Express.js Middleware Stack                          │ │
+│  │  • CORS                                               │ │
+│  │  • Body Parser                                        │ │
+│  │  • JWT Authentication                                 │ │
+│  │  • Multer (File Upload)                               │ │
+│  │  • Error Handling                                     │ │
+│  └────────────────────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  Route Handlers                                        │ │
+│  │  • Client Routes (/api/client)                        │ │
+│  │  • Lawyer Routes (/api/lawyer)                        │ │
+│  │  • Appointment Routes (/api/new)                      │ │
+│  │  • Review Routes (/api/review)                        │ │
+│  └────────────────────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  Business Logic (Controllers)                          │ │
+│  │  • Input Validation                                    │ │
+│  │  • Business Rules                                      │ │
+│  │  • Error Handling                                      │ │
+│  └────────────────────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  Prisma ORM                                            │ │
+│  │  • Type-safe queries                                   │ │
+│  │  • Migration management                                │ │
+│  │  • Database connection pooling                         │ │
+│  └────────────────────────────────────────────────────────┘ │
+└───────────────────────────┬─────────────────────────────────┘
+                            │
+                            │ SQL Queries
+                            │
+┌───────────────────────────▼─────────────────────────────────┐
+│                    PostgreSQL Database                       │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  Tables                                                │ │
+│  │  • Client (Users seeking legal help)                  │ │
+│  │  • Lawyer (Legal professionals)                       │ │
+│  │  • Appointment (Booking records)                      │ │
+│  │  • Review (Feedback & ratings)                        │ │
+│  └────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│                    Cloudinary (Cloud Storage)                │
+│  • Document uploads                                          │
+│  • Lawyer profile images                                     │
+│  • Secure file URLs                                          │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Database Schema
+
+```
+┌─────────────────┐           ┌─────────────────┐
+│     Client      │           │     Lawyer      │
+├─────────────────┤           ├─────────────────┤
+│ id (PK)         │           │ id (PK)         │
+│ name            │           │ name            │
+│ email (unique)  │           │ email (unique)  │
+│ password        │           │ password        │
+│ phone           │           │ speciality      │
+│ gender          │           │ degree          │
+│ address         │           │ about           │
+│ createdAt       │           │ experience      │
+└────────┬────────┘           │ image           │
+         │                    │ fees            │
+         │                    │ address (JSON)  │
+         │                    │ achievements[]  │
+         │                    │ languages[]     │
+         │                    │ memberships[]   │
+         │                    │ createdAt       │
+         │                    └────────┬────────┘
+         │                             │
+         │        ┌────────────────────┴─────┐
+         │        │                          │
+         └────────▼────────┐    ┌────────────▼─────────┐
+              Appointment   │    │      Review         │
+         ├──────────────────┤    ├─────────────────────┤
+         │ id (PK)          │    │ id (PK)             │
+         │ client_first_name│    │ username            │
+         │ client_last_name │    │ rating              │
+         │ contact_number   │    │ descriptions        │
+         │ age              │    │ lawyer_id (FK)      │
+         │ gender           │    │ client_id (FK)      │
+         │ lawyer_name      │    │ created_at          │
+         │ lawyer_speciality│    └─────────────────────┘
+         │ documents_url    │
+         │ appointment_date │
+         │ term             │
+         │ message          │
+         │ created_at       │
+         │ lawyer_id (FK)   │
+         │ client_id (FK)   │
+         └──────────────────┘
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (v18.x or higher) - [Download](https://nodejs.org/)
+- **npm** or **yarn** or **pnpm** - Package manager
+- **PostgreSQL** (v14.x or higher) - [Download](https://www.postgresql.org/download/)
+- **Git** - [Download](https://git-scm.com/downloads)
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/Priyangshu-0221/LawConnect.git
+cd LawConnect
+```
+
+### Backend Setup
+
+1. **Navigate to backend directory**
+
+   ```bash
+   cd backend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env` file in the backend directory:
+
+   ```env
+   # Database Configuration
+   DATABASE_URL="postgresql://username:password@localhost:5432/lawconnect?schema=public"
+
+   # Server Configuration
+   PORT=8080
+   NODE_ENV=development
+
+   # JWT Secret (Generate a strong secret)
+   JWT_SECRET_KEY="your-super-secret-jwt-key-change-this-in-production"
+
+   # Cloudinary Configuration
+   CLOUDINARY_CLOUD_NAME="your-cloud-name"
+   CLOUDINARY_API_KEY="your-api-key"
+   CLOUDINARY_API_SECRET="your-api-secret"
+   ```
+
+4. **Set up database**
+
+   ```bash
+   # Run migrations
+   npx prisma migrate dev --name init
+
+   # Generate Prisma Client
+   npx prisma generate
+   ```
+
+5. **Start the backend server**
+
+   ```bash
+   npm run dev
+   ```
+
+   The backend will start at `http://localhost:8080`
+
+### Frontend Setup
+
+1. **Navigate to frontend directory** (from project root)
+
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+
+   Create a `.env.local` file in the frontend directory:
+
+   ```env
+   # Backend API URL
+   NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
+   ```
+
+4. **Start the frontend server**
+
+   ```bash
+   npm run frontend
+   ```
+
+   The frontend will start at `http://localhost:3000`
+
+### Access the Application
+
+Open your browser and navigate to:
+
+- **Frontend**: `http://localhost:3000`
+- **Backend API**: `http://localhost:8080`
+- **Prisma Studio** (Database GUI): Run `npx prisma studio` in backend directory
+
+---
+
+## 📁 Project Structure
 
 ```
 LawConnect/
 │
-├── backend/
-│   ├── Controller/           # Business logic for appointments, lawyers, clients
-│   ├── DATABASE/             # Prisma & Cloudinary config
-│   ├── generated/            # Prisma generated client
-│   ├── middlewares/          # JWT auth, file upload
-│   ├── prisma/               # Prisma schema & migrations
-│   ├── Routes/               # API endpoints
-│   ├── server.js             # Express server entry
+├── backend/                          # Backend API (Node.js + Express)
+│   ├── Controller/                   # Business logic layer
+│   │   ├── Client.Controller.js
+│   │   ├── Lawyer.Controller.js
+│   │   ├── Appointment.Controller.js
+│   │   └── Review.Controller.js
+│   │
+│   ├── DATABASE/                     # Database configuration
+│   │   ├── db.config.js
+│   │   └── cloudinary.config.js
+│   │
+│   ├── middlewares/                  # Custom middleware
+│   │   ├── authMiddleware.js
+│   │   ├── lawyerAuth.js
+│   │   └── multer.js
+│   │
+│   ├── prisma/                       # Prisma ORM
+│   │   ├── schema.prisma
+│   │   └── migrations/
+│   │
+│   ├── Routes/                       # API routes
+│   │   ├── index.js
+│   │   ├── client.Route.js
+│   │   ├── lawyer.Route.js
+│   │   ├── appointment.Route.js
+│   │   └── review.Route.js
+│   │
+│   ├── .env                          # Environment variables
 │   ├── package.json
-│   └── .env
+│   ├── server.js                     # Application entry point
+│   └── README.md                     # Backend documentation
 │
-├── frontend/
-│   ├── app/                  # Next.js app directory (routing, layouts, pages, dynamic routes)
-│   ├── Components/           # Reusable React components
-│   ├── context/              # React context for global state
-│   ├── lib/                  # API utilities, helpers
-│   ├── public/               # Static assets (images, lawyer images, favicon, etc.)
-│   ├── styles/               # Tailwind and custom styles
-│   ├── hooks/                # Custom React hooks
+├── frontend/                         # Frontend (Next.js + React)
+│   ├── app/                          # Next.js App Router
+│   │   ├── layout.js
+│   │   ├── page.js
+│   │   ├── globals.css
+│   │   ├── about/
+│   │   ├── all_lawyers/
+│   │   ├── appointment/
+│   │   ├── contact/
+│   │   ├── login/
+│   │   ├── signup/
+│   │   ├── lawyerlogin/
+│   │   ├── lawyersignup/
+│   │   ├── user/
+│   │   ├── lawyer/
+│   │   ├── myappointment/
+│   │   └── lawyer_appointment/
+│   │
+│   ├── Components/                   # Reusable components
+│   │   ├── Navbar.js
+│   │   ├── Footer.js
+│   │   ├── Login.js
+│   │   ├── Signup.js
+│   │   ├── LawyerLogin.js
+│   │   ├── LawyerSignup.js
+│   │   ├── UserComponent.js
+│   │   ├── LawyerComponent.js
+│   │   ├── AppointmentFrom.js
+│   │   ├── MyAppointments.js
+│   │   ├── ReviewFrom.js
+│   │   ├── ReviewComponent.js
+│   │   ├── Home/
+│   │   └── ui/                       # shadcn/ui components
+│   │
+│   ├── context/                      # React Context
+│   │   └── AppContext.js
+│   │
+│   ├── public/                       # Static assets
+│   │   ├── logo.png
+│   │   ├── lawyers/
+│   │   └── ...
+│   │
+│   ├── .env.local                    # Environment variables
 │   ├── package.json
-│   └── .env.local
+│   ├── next.config.mjs
+│   └── README.md                     # Frontend documentation
 │
-└── README.md                 # Project overview (this file)
+└── README.md                         # This file (Project overview)
 ```
 
 ---
 
-## 🛠️ Backend Overview
+## 📚 API Documentation
 
-- **API:** RESTful endpoints for authentication, lawyer/client management, and appointments.
-- **Authentication:** JWT-based for both lawyers and clients.
-- **Database:** PostgreSQL managed via Prisma ORM.
-- **File Uploads:** Legal documents uploaded to Cloudinary.
-- **Security:** Passwords hashed with Bcrypt, environment variables for secrets.
-- **Key Routes:**
-  - `/api/client/signup`, `/api/client/login`, `/api/client/profile`
-  - `/api/lawyer/signup`, `/api/lawyer/login`, `/api/lawyer/lawyerprofile`
-  - `/api/new/appointment` (with file upload)
+### Base URL
+
+```
+http://localhost:8080
+```
+
+### Authentication
+
+All protected routes require a JWT token in the Authorization header:
+
+```
+Authorization: Bearer <your-jwt-token>
+```
+
+### Main Endpoints
+
+#### Client Endpoints
+
+- `POST /api/client/signup` - Register a new client
+- `POST /api/client/login` - Client login
+- `GET /api/client/profile` 🔒 - Get client profile
+- `PATCH /api/client/profile/update` 🔒 - Update client profile
+
+#### Lawyer Endpoints
+
+- `POST /api/lawyer/signup` - Register a new lawyer
+- `POST /api/lawyer/login` - Lawyer login
+- `GET /api/lawyer/lawyerprofile` 🔒 - Get lawyer profile
+- `PATCH /api/lawyer/update` 🔒 - Update lawyer profile
+- `POST /api/lawyer/avatar` 🔒 - Upload lawyer avatar
+- `GET /api/lawyer/alllawyers` - Get all lawyers
+- `GET /api/lawyer/singlelawyer?id={id}` - Get single lawyer
+
+#### Appointment Endpoints
+
+- `POST /api/new/form` 🔒 - Book new appointment
+- `GET /api/new/clientappointment` 🔒 - Get client appointments
+- `GET /api/new/lawyersappointment/:id` - Get lawyer appointments
+- `DELETE /api/new/cancelappointment/:id` 🔒 - Cancel appointment
+
+#### Review Endpoints
+
+- `POST /api/review/addreview` 🔒 - Submit a review
+- `GET /api/review/allreviews?lawyerId={id}` - Get lawyer reviews
+
+**🔒 = Protected Route (Requires Authentication)**
+
+For detailed API documentation, see:
+
+- [Backend README](./backend/README.md)
 
 ---
 
-### Additional Backend Endpoints
+## 🌍 Environment Configuration
 
-- **Review API:**
-  - `/api/review/addreview` — Add a review for a lawyer (client auth required)
-  - `/api/review/getreviews?lawyerId=LAWYER_ID` — Get all reviews for a lawyer
-  - Review controller handles adding and fetching reviews, linking clients and lawyers.
+### Backend Environment Variables
 
----
+Create a `.env` file in the `backend/` directory:
 
-## 🎨 Frontend Overview
+```env
+# Database
+DATABASE_URL="postgresql://username:password@localhost:5432/lawconnect?schema=public"
 
-- **Framework:** Next.js for SSR, routing, and performance.
-- **UI:** Built with React, styled using Tailwind CSS and Shadcn/ui.
-- **Features:**
-  - Authentication flows for users
-  - Lawyer search and filtering by speciality
-  - Appointment booking with document upload
-  - Dashboards for users
-  - Responsive layouts for all devices
-- **API Integration:** Communicates with backend via RESTful APIs.
+# Server
+PORT=8080
+NODE_ENV=development
 
----
+# Authentication
+JWT_SECRET_KEY="your-super-secret-jwt-key-min-32-characters"
 
-## ⚡ Getting Started
+# Cloudinary
+CLOUDINARY_CLOUD_NAME="your-cloud-name"
+CLOUDINARY_API_KEY="your-api-key"
+CLOUDINARY_API_SECRET="your-api-secret"
 
-### 1. **Clone the Repository**
+# Optional: Clerk Authentication
+CLERK_PUBLISHABLE_KEY="pk_test_..."
+CLERK_SECRET_KEY="sk_test_..."
+```
 
-```sh
-git clone https://your-repo-url/LawConnect.git
-cd LawConnect
+### Frontend Environment Variables
+
+Create a `.env.local` file in the `frontend/` directory:
+
+```env
+# API Configuration
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
+
+# Optional: Analytics
+# NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# Optional: Sentry Error Tracking
+# NEXT_PUBLIC_SENTRY_DSN=https://xxxxx@sentry.io/xxxxx
+```
+
+### Generating Secure Secrets
+
+**For JWT_SECRET_KEY:**
+
+```bash
+# Using Node.js
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+# Using OpenSSL
+openssl rand -base64 32
+
+# Using PowerShell (Windows)
+[Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
 ```
 
 ---
 
-### 2. **Backend Setup & Details**
+## 🔧 Development
 
-The backend is located in the `backend/` directory and is built with Node.js, Express, Prisma ORM, and PostgreSQL. It provides all RESTful APIs for authentication, lawyer/client management, and appointment handling.
+### Running in Development Mode
 
-- **Install dependencies:**
-  ```sh
-  cd backend
-  npm install
-  ```
-- **Configure environment:**
-  - Create a `.env` file in `backend/` with your PostgreSQL connection string, JWT secret, and Cloudinary credentials. Example:
-    ```env
-    DATABASE_URL=postgresql://user:password@localhost:5432/lawconnect
-    JWT_SECRET=your_jwt_secret
-    CLOUDINARY_CLOUD_NAME=your_cloud_name
-    CLOUDINARY_API_KEY=your_api_key
-    CLOUDINARY_API_SECRET=your_api_secret
-    ```
-- **Database setup:**
-  - Run Prisma migrations to set up the database schema:
-    ```sh
-    npx prisma migrate dev
-    ```
-- **Start the backend server:**
-  ```sh
-  npm run dev
-  ```
-- **Key Features:**
-  - Modular controllers for lawyers, clients, and appointments
-  - JWT authentication middleware
-  - Multer for file uploads, Cloudinary for storage
-  - Prisma ORM for type-safe database access
-  - Organized route structure under `Routes/`
+**Backend:**
 
----
+```bash
+cd backend
+npm run dev
+```
 
-### 3. **Frontend Setup & Details**
+**Frontend:**
 
-The frontend is located in the `frontend/` directory and is built with Next.js, React, Tailwind CSS, and Shadcn/ui. It provides all user interfaces, authentication flows, dashboards, and appointment booking features.
+```bash
+cd frontend
+npm run frontend
+```
 
-- **Install dependencies:**
-  ```sh
-  cd ../frontend
-  npm install
-  ```
-- **Configure environment:**
-  - Create a `.env.local` file in `frontend/` with your backend API endpoint. Example:
-    ```env
-    NEXT_PUBLIC_API_URL=http://localhost:5000
-    ```
-- **Start the frontend server:**
-  ```sh
-  npm run dev
-  ```
-- **Key Features:**
-  - Next.js app directory structure for routing and layouts
-  - Context-based state management for authentication and user data
-  - Dynamic lawyer search and filtering by speciality
-  - Responsive UI with Tailwind CSS and Shadcn/ui components
-  - File/document upload integration for appointments
-  - User and lawyer dashboards for managing appointments
+### Database Management
 
-Open [http://localhost:3000](http://localhost:3000) to view the app.
+**View Database (Prisma Studio):**
 
----
+```bash
+cd backend
+npx prisma studio
+```
 
-## 📝 License
+Access at `http://localhost:5555`
 
-MIT
+**Create Migration:**
+
+```bash
+cd backend
+npx prisma migrate dev --name your_migration_name
+```
+
+**Generate Prisma Client:**
+
+```bash
+cd backend
+npx prisma generate
+```
+
+**Reset Database (⚠️ Deletes all data):**
+
+```bash
+cd backend
+npx prisma migrate reset
+```
+
+### Code Quality
+
+**Linting:**
+
+```bash
+# Frontend
+cd frontend
+npm run lint
+
+# Backend (if configured)
+cd backend
+npm run lint
+```
 
 ---
 
-## 👤 Author
+## 📦 Deployment
 
-Priyangshu
+### Production Build
+
+**Frontend:**
+
+```bash
+cd frontend
+npm run build
+npm start
+```
+
+**Backend:**
+
+```bash
+cd backend
+npm start
+```
+
+### Deployment Platforms
+
+#### Recommended Setup
+
+- **Frontend**: Deploy to [Vercel](https://vercel.com/) or [Netlify](https://www.netlify.com/)
+- **Backend**: Deploy to [Railway](https://railway.app/), [Render](https://render.com/), or [Heroku](https://www.heroku.com/)
+- **Database**: [Supabase](https://supabase.com/), [Railway PostgreSQL](https://railway.app/), or [ElephantSQL](https://www.elephantsql.com/)
+
+#### Deployment Checklist
+
+**Backend:**
+
+- [ ] Set `NODE_ENV=production`
+- [ ] Use strong, unique `JWT_SECRET_KEY`
+- [ ] Configure production database URL
+- [ ] Set up HTTPS/SSL certificates
+- [ ] Configure CORS for frontend domain
+- [ ] Set up logging and monitoring
+- [ ] Configure rate limiting
+- [ ] Set up automatic backups
+- [ ] Run `prisma migrate deploy`
+
+**Frontend:**
+
+- [ ] Update `NEXT_PUBLIC_BACKEND_URL` to production API
+- [ ] Test production build locally
+- [ ] Optimize images and assets
+- [ ] Enable error tracking (Sentry)
+- [ ] Set up analytics (Google Analytics)
+- [ ] Configure CDN for static assets
+- [ ] Test on multiple devices/browsers
+- [ ] Set up monitoring
+
+---
+
+## 🧪 Testing
+
+### Manual Testing
+
+**Authentication Flow:**
+
+1. Register as a client
+2. Login with credentials
+3. Register as a lawyer
+4. Login with lawyer credentials
+5. Verify token persistence
+6. Test logout functionality
+
+**Appointment Flow:**
+
+1. Browse lawyers
+2. View lawyer profile
+3. Book an appointment
+4. Upload documents
+5. View appointment in dashboard
+6. Cancel appointment
+
+**Review Flow:**
+
+1. Submit a review for a lawyer
+2. View reviews on lawyer profile
+3. Verify review displays correctly
+
+---
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+**Database Connection Error:**
+
+```
+Error: Can't reach database server
+```
+
+**Solution:**
+
+- Ensure PostgreSQL is running
+- Verify `DATABASE_URL` in `.env`
+- Check firewall settings
+- Verify database credentials
+
+**JWT Token Invalid:**
+
+```
+Unauthorized: Invalid token
+```
+
+**Solution:**
+
+- Check token expiration (6-hour validity)
+- Verify `JWT_SECRET_KEY` matches on frontend/backend
+- Check Authorization header format: `Bearer <token>`
+- Clear localStorage and re-login
+
+**CORS Error:**
+
+```
+Access-Control-Allow-Origin error
+```
+
+**Solution:**
+
+- Verify CORS configuration in backend
+- Check frontend URL is allowed
+- Ensure credentials are included in requests
+
+**Cloudinary Upload Fails:**
+
+```
+Error: Invalid credentials
+```
+
+**Solution:**
+
+- Verify Cloudinary credentials in `.env`
+- Check API key permissions
+- Ensure internet connectivity
+
+---
+
+## 📝 Best Practices Implemented
+
+### Security
+
+✅ Password hashing with bcrypt  
+✅ JWT-based stateless authentication  
+✅ Input validation using validator.js  
+✅ Role-based access control  
+✅ Environment variable management  
+✅ HTTPS enforcement in production  
+✅ XSS protection
+
+### Code Quality
+
+✅ Modular architecture (MVC pattern)  
+✅ Separation of concerns  
+✅ DRY principle  
+✅ Consistent error handling  
+✅ ESLint configuration  
+✅ Meaningful variable names
+
+### Database
+
+✅ Type-safe queries with Prisma  
+✅ Proper indexing (unique constraints)  
+✅ Migration version control  
+✅ Foreign key relationships  
+✅ Connection pooling
+
+### Performance
+
+✅ Next.js Image optimization  
+✅ Code splitting and lazy loading  
+✅ Efficient re-rendering  
+✅ Optimized bundle size  
+✅ CDN integration
+
+### User Experience
+
+✅ Responsive design  
+✅ Loading states  
+✅ Error handling  
+✅ Toast notifications  
+✅ Smooth animations  
+✅ Accessibility features
+
+---
+
+## 🚀 Future Enhancements
+
+### Planned Features
+
+- [ ] Real-time chat between clients and lawyers
+- [ ] Video consultation integration (Zoom/Google Meet)
+- [ ] Payment gateway integration (Stripe/PayPal)
+- [ ] Advanced search and filters
+- [ ] Email/SMS notifications
+- [ ] Multi-language support (i18n)
+- [ ] Dark mode theme
+- [ ] Progressive Web App (PWA)
+- [ ] Mobile apps (React Native)
+- [ ] Advanced analytics dashboard
+- [ ] AI-powered lawyer recommendations
+- [ ] Calendar integration (Google Calendar)
+- [ ] Document e-signature
+- [ ] Legal case tracking system
+
+### Technical Improvements
+
+- [ ] Unit testing with Jest
+- [ ] E2E testing with Playwright
+- [ ] Performance monitoring
+- [ ] Error tracking with Sentry
+- [ ] GraphQL API implementation
+- [ ] WebSocket for real-time updates
+- [ ] Redis caching layer
+- [ ] Microservices architecture
+- [ ] Docker containerization
+- [ ] Kubernetes orchestration
+
+---
+
+## 📄 License
+
+This project is licensed under the **ISC License**.
+
+```
+ISC License
+
+Copyright (c) 2025 Priyangshu
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+```
+
+---
+
+## 👨‍💻 Author
+
+**Priyangshu**
+
+- GitHub: [@Priyangshu-0221](https://github.com/Priyangshu-0221)
+- Repository: [LawConnect](https://github.com/Priyangshu-0221/LawConnect)
+- LinkedIn: [Add your LinkedIn]
+- Email: [Add your email]
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+### How to Contribute
+
+1. **Fork the Project**
+
+   ```bash
+   git clone https://github.com/Priyangshu-0221/LawConnect.git
+   ```
+
+2. **Create your Feature Branch**
+
+   ```bash
+   git checkout -b feature/AmazingFeature
+   ```
+
+3. **Commit your Changes**
+
+   ```bash
+   git commit -m 'Add some AmazingFeature'
+   ```
+
+4. **Push to the Branch**
+
+   ```bash
+   git push origin feature/AmazingFeature
+   ```
+
+5. **Open a Pull Request**
+
+### Contribution Guidelines
+
+- Follow the existing code style
+- Write clear commit messages
+- Add comments for complex logic
+- Update documentation as needed
+- Test your changes thoroughly
+- Ensure no linting errors
+
+---
+
+## 📞 Support
+
+For support and questions:
+
+- **Email**: support@lawconnect.com
+- **Issues**: [GitHub Issues](https://github.com/Priyangshu-0221/LawConnect/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Priyangshu-0221/LawConnect/discussions)
+
+---
+
+## 🙏 Acknowledgments
+
+- [Next.js](https://nextjs.org/) - The React Framework
+- [Express.js](https://expressjs.com/) - Fast web framework
+- [Prisma](https://www.prisma.io/) - Next-generation ORM
+- [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS
+- [shadcn/ui](https://ui.shadcn.com/) - Beautiful components
+- [Material-UI](https://mui.com/) - Component library
+- [Cloudinary](https://cloudinary.com/) - Media management
+- [Vercel](https://vercel.com/) - Deployment platform
+
+---
+
+## 📊 Project Stats
+
+![GitHub repo size](https://img.shields.io/github/repo-size/Priyangshu-0221/LawConnect)
+![GitHub stars](https://img.shields.io/github/stars/Priyangshu-0221/LawConnect?style=social)
+![GitHub forks](https://img.shields.io/github/forks/Priyangshu-0221/LawConnect?style=social)
+![GitHub issues](https://img.shields.io/github/issues/Priyangshu-0221/LawConnect)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Priyangshu-0221/LawConnect)
+![GitHub last commit](https://img.shields.io/github/last-commit/Priyangshu-0221/LawConnect)
+
+---
+
+<div align="center">
+
+### ⭐ Star this repository if you find it helpful!
+
+**Made with ❤️ by Priyangshu**
+
+---
+
+**LawConnect** - Connecting Clients with Legal Excellence
+
+[⬆ Back to Top](#️-lawconnect)
+
+</div>

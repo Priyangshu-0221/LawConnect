@@ -17,26 +17,28 @@ const LawyerLogin = () => {
     e.preventDefault();
     console.log("hii");
     try {
-      const loginUser = await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/doctor/login`,
+      const loginLawyer = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/lawyer/login`,
         {
           email,
           password,
         }
       );
-      const token = await loginUser.data.token;
-      const user_role = await loginUser.data.role;
-      localStorage.setItem("token", token);
-      localStorage.setItem("user_role", user_role);
-      if (token) {
+      const lawyer_token = await loginLawyer.data.token;
+      const lawyer_role = await loginLawyer.data.lawyer_role;
+      const lawyerId = await loginLawyer.data.lawyerId;
+      localStorage.setItem("lawyer_token", lawyer_token);
+      localStorage.setItem("lawyer_role", lawyer_role);
+      localStorage.setItem("lawyerId", lawyerId);
+      if (lawyer_token) {
         toast.success("Login Successful");
-        window.location.href = "/doctor";
+        window.location.href = `/lawyer/${loginLawyer.data.lawyerId}`;
         setemail("");
         setpassword("");
       } else {
-        window.location.href = "/login";
+        window.location.href = "/lawyerlogin";
       }
-    } catch (error) {
+    } catch (error) {   
       console.log(error);
       toast.error(error.response.data.message);
     }

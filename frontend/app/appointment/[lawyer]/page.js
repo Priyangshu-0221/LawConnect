@@ -8,6 +8,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import ReviewComponent from "@/Components/ReviewComponent";
 import ReviewFrom from "@/Components/ReviewFrom";
+import { Button } from "@/Components/ui/button";
+import Link from "next/link";
 
 const Page = () => {
   const params = useParams();
@@ -70,7 +72,12 @@ const Page = () => {
             <Image
               height={300}
               width={300}
-              src={`${lawInfo.image}`}
+              src={
+                lawInfo.image &&
+                (lawInfo.image.startsWith('http') || lawInfo.image.startsWith('/'))
+                  ? lawInfo.image
+                  : '/user.jpg'
+              }
               priority
               className="h-200 py-2 w-full object-cover rounded-4xl"
               alt={lawInfo.name} // And so will this
@@ -129,20 +136,28 @@ const Page = () => {
       </div>
       <div>
         <div className="flex items-center justify-center">
-          {!bookAppointment ? (
-            <button
+          { userId ? (
+            <Button
               onClick={() => {
                 setbookAppointment(!bookAppointment);
               }}
-              className="w-[50%] h-10 rounded-full cursor-pointer active:bg-blue-300 text-white x-6 bg-blue-600"
+              className="w-[50%]"
             >
               Book Appointment
-            </button>
+            </Button>
           ) : (
-            <></>
+            <div className="w-full px-10">
+            <Link href="/login">
+              <Button
+            className="w-full text-lg"
+          >
+            Book Appointment
+          </Button>
+          </Link>
+          </div>
           )}
         </div>
-        {!bookAppointment ? (
+        {!bookAppointment  ? (
           <></>
         ) : (
           <AppointmentFrom

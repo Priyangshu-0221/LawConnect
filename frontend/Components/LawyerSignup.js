@@ -9,7 +9,7 @@ import Image from "next/image";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const SignUp = () => {
+const LawyerSignup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,7 +17,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userCreated = await axios.post(
+      const lawyerCreated = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/lawyer/signup`,
         {
           name,
@@ -25,23 +25,27 @@ const SignUp = () => {
           password,
         }
       );
-      console.log("userCreated:", userCreated);
-      const token = await userCreated.data.token;
-      const user_role = await userCreated.data.role;
-      console.log(token);
-      localStorage.setItem("token", token);
-      localStorage.setItem("user_role", user_role);
-      toast.success("User Created Successfully");
-      if (token) {
-        window.location.href = "/lawyer";
-        setuserName("");
-        setEmail("");
-        setPassword("");
+      console.log("lawyerCreated:", lawyerCreated);
+      if (lawyerCreated && lawyerCreated.data) {
+        const lawyer_token = lawyerCreated.data.token;
+        const lawyer_role = lawyerCreated.data.lawyer_role;
+        localStorage.setItem("lawyer_token", lawyer_token);
+        localStorage.setItem("lawyer_role", lawyer_role);
+        toast.success("Welcome to LawConnect Lawyer!");
+        window.location.href = "/lawyerlogin";
+        toast.message("Please Login to proceed with your lawyer account.");
+        if (lawyer_token) {
+          setName("");
+          setEmail("");
+          setPassword("");
+        } else {
+          window.location.href = "/lawyersignup";
+        }
       } else {
-        window.location.href = "/signup";
+        toast.error("Signup failed: No response data");
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message || "Signup failed");
     }
   };
 
@@ -65,17 +69,17 @@ const SignUp = () => {
                   Welcome to LawConnect Lawyer
                 </h1>
                 <p className="text-muted-foreground text-balance">
-                  Signup into LawConnect account
+                  LawyerSignup into LawConnect account
                 </p>
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="email">Please enter your fullname</Label>
+                <Label htmlFor="email">Please enter your FullName</Label>
                 <Input
-                  id="username"
+                  id="lawyername"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Enter your username"
+                  placeholder="Enter your lawyername"
                   required
                 />
               </div>
@@ -102,12 +106,12 @@ const SignUp = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <Button variant="secondary" type="submit" className="w-full">
-                SignUp
+              <Button  type="submit" className="w-full">
+                Lawyer Signup
               </Button>
 
               <div className="text-center text-sm">
-                Already a registered Docotr....? {"  "}
+                Already a registered Lawyer....? {"  "}
                 <Link
                   href="/lawyerlogin"
                   prefetch={true}
@@ -128,4 +132,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default LawyerSignup;

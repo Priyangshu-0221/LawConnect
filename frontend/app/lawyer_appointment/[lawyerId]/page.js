@@ -10,10 +10,11 @@ const MyAppointments = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const lawyerId = localStorage.getItem("lawyerId");
     try {
       const appointmentData = async () => {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/new/myappointments`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/new/lawyer/appointment/${lawyerId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -34,7 +35,7 @@ const MyAppointments = () => {
       const token = localStorage.getItem("token");
       if (token) {
         await axios.delete(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/new/appointment/delete/${appointmentId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/new/lawyer/delete/${appointmentId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -55,14 +56,14 @@ const MyAppointments = () => {
   return (
     <div className="py-5 flex flex-col">
       <div className="text-center py-2">
-        <h1 className="text-5xl mb-4">Hiii, User</h1>
+        <h1 className="text-5xl mb-4">Welcome Sir..!!</h1>
         <h3 className="text-3xl underline">My Appointments</h3>
       </div>
 
       {myappointments.length === 0 ? (
         <div className="flex items-center justify-center h-screen w-screen">
           <p className="text-center text-5xl text-gray-500">
-            No appointments found...... 🥲🥲🥲
+            No current Appointments...!!
           </p>
         </div>
       ) : (
@@ -72,24 +73,23 @@ const MyAppointments = () => {
               key={index}
               className="sm:flex md:flex w-screen md:flex-row sm:flex-col px-5 bg-gray-100 py-3 items-center justify-evenly mb-5"
             >
-              <div className="md:w-[20%] sm:w-screen">
-                <Image
-                  priority
-                  height={300}
-                  width={300}
-                  src={`${appointment.lawyer?.image}` || "default.png"}
-                  className="h-80 w-full rounded-3xl object-fill"
-                  alt="Lawyer"
-                />
-              </div>
               <div className="md:w-[55%] sm:w-screen py-6 px-2">
                 <h1 className="text-2xl font-semibold">
-                  {appointment.lawyer?.name}
+                  Client Name --{appointment.client?.name}
                 </h1>
-                <h3>{appointment.lawyer?.speciality}</h3>
-                <h3 className="text-xl">{appointment.lawyer?.address.line1}</h3>
-                <h3 className="text-xl">{appointment.lawyer?.address.line2}</h3>
-
+                <h3>{appointment.message}</h3>
+                {appointment.client?.address?.line1 || appointment.client?.address?.line2 ? (
+                  <>
+                    {appointment.client?.address?.line1 && (
+                      <h3 className="text-xl">{appointment.client.address.line1}</h3>
+                    )}
+                    {appointment.client?.address?.line2 && (
+                      <h3 className="text-xl">{appointment.client.address.line2}</h3>
+                    )}
+                  </>
+                ) : (
+                  <h3 className="text-xl">No address</h3>
+                )}
                 <h1 className="text-xl mt-2">
                   Appointment Date & Time -{" "}
                   <span>
@@ -100,7 +100,7 @@ const MyAppointments = () => {
                 </h1>
               </div>
               <div className="flex flex-col md:w-[15%] sm:w-screen py-6 gap-y-5">
-                <Button className="text-lg">Proceed to Payment</Button>
+
                 <Button
                   className="cursor-pointer text-lg"
                   variant="destructive"

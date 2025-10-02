@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-const doctorSpeciality = [
+const lawyerSpeciality = [
   {
     label: "Criminal Law",
     route: "Criminal Law",
@@ -42,7 +42,7 @@ const Speciality = () => {
         </p>
       </div>
       <div className="flex flex-wrap justify-center gap-6 px-4 md:px-12 lg:px-24">
-        {doctorSpeciality.map(({ label, route, image }) => (
+        {lawyerSpeciality.map(({ label, route, image }) => (
           <Link
             key={route}
             href={`/lawyers/${route.toLowerCase().replace(/\s+/g, "")}`}
@@ -66,7 +66,7 @@ const Speciality = () => {
         ))}
       </div>
       <div className="mt-8 text-center">
-        <Link href="/doctors">
+        <Link href="/lawyers">
           <span className="inline-block text-blue-600 font-semibold hover:underline hover:text-blue-800 transition-colors duration-200 text-lg">
             & many more... <span className="animate-pulse">!</span>
           </span>

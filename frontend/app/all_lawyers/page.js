@@ -29,35 +29,35 @@ const Page = () => {
             Browse by speciality
           </h1>
           <div className="w-full bg-gray-200 mb-2 hover:bg-black hover:text-white  mt-2 rounded-full text-lg h-10 text-center flex justify-center items-center">
-            <Link href="/lawyers/CriminalLaw" prefetch={true}>
+            <Link href="/all_lawyers/CriminalLaw" prefetch={true}>
               <p>
                 Criminal Law <ArrowForwardIosIcon />
               </p>
             </Link>
           </div>
           <div className="w-full bg-gray-200 mb-2 hover:bg-black hover:text-white  rounded-full text-lg h-10 text-center flex justify-center items-center">
-            <Link href="/lawyers/CivilLitigation" prefetch={true}>
+            <Link href="/all_lawyers/CivilLitigation" prefetch={true}>
               <p>
                 Civil Litigation <ArrowForwardIosIcon />
               </p>
             </Link>
           </div>
           <div className="w-full bg-gray-200 mb-2 hover:bg-black hover:text-white  rounded-full text-lg h-10 text-center flex justify-center items-center">
-            <Link href="/lawyers/ContractLaw" prefetch={true}>
+            <Link href="/all_lawyers/ContractLaw" prefetch={true}>
               <p>
                 Corporate Law <ArrowForwardIosIcon />
               </p>
             </Link>
           </div>
           <div className="w-full bg-gray-200 mb-2 hover:bg-black hover:text-white  rounded-full text-lg h-10 text-center flex justify-center items-center">
-            <Link href="/lawyers/ConstitutionalLaw" prefetch={true}>
+            <Link href="/all_lawyers/ConstitutionalLaw" prefetch={true}>
               <p>
                 Constitutional Law <ArrowForwardIosIcon />
               </p>
             </Link>
           </div>
           <div className="w-full bg-gray-200 mb-2 hover:bg-black hover:text-white  rounded-full text-lg h-10 text-center flex justify-center items-center">
-            <Link href="/lawyers/ContractLaw" prefetch={true}>
+            <Link href="/all_lawyers/ContractLaw" prefetch={true}>
               <p>
                 Contract Law <ArrowForwardIosIcon />
               </p>
@@ -74,7 +74,12 @@ const Page = () => {
                 <Image
                   height={300}
                   width={300}
-                  src={`${lawyer.image}`}
+                  src={
+                    lawyer.image &&
+                    (lawyer.image.startsWith('http') || lawyer.image.startsWith('/'))
+                      ? lawyer.image
+                      : '/user.jpg'
+                  }
                   priority
                   alt={lawyer.name}
                   onContextMenu={(e) => {
@@ -89,19 +94,12 @@ const Page = () => {
                   <h1>{lawyer.name}</h1>
                   <p>{lawyer.experience} </p>
                   <p>{lawyer.speciality}</p>
-                  {token ? (
+
                     <Link href={`/appointment/${lawyer.id}`}>
                       <button className="bg-[#ff0054] text-white w-fit px-2 rounded-full cursor-pointer active:bg-amber-50">
-                        Book Appointment
+                        View Profile
                       </button>
                     </Link>
-                  ) : (
-                    <Link href="/login" prefetch={true}>
-                      <button className="bg-[#FF0054] text-white w-fit px-2 rounded-full cursor-pointer active:bg-amber-50 ">
-                        Book Appointment
-                      </button>
-                    </Link>
-                  )}
                 </div>
               </div>
             );

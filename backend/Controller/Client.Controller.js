@@ -42,7 +42,7 @@ export const createclient = async (req, res) => {
         { id: newclient.id, role: "client" },
         process.env.JWT_SECRET_KEY,
         {
-          expiresIn: "1h",
+          expiresIn: "6h",
         }
       );
       console.log(token);
@@ -90,7 +90,7 @@ export const loginclient = async (req, res) => {
           { id: existedUser.id, role: "client" },
           process.env.JWT_SECRET_KEY,
           {
-            expiresIn: "1h",
+            expiresIn: "6h",
           }
         );
         console.log(token);

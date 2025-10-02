@@ -1,3 +1,4 @@
+import LawyerSignup from "@/Components/LawyerSignup";
 import SignUp from "@/Components/Signup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Link from "next/link";
@@ -10,8 +11,8 @@ export default function SignUpPage() {
             <ArrowBackIcon />Go Back
           </h1>
         </Link>
-        <SignUp/>
+        <LawyerSignup/>
       </div>
     </div>
   );
-}
+} 

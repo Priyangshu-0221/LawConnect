@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 export const AppContext = createContext();
 
-const DoctorContextProvider = ({ children }) => {
+const LawyerContextProvider = ({ children }) => {
   const [lawyers, setLawyers] = useState([]);
 
   const allLawyers = async () => {
@@ -27,4 +27,4 @@ const DoctorContextProvider = ({ children }) => {
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
-export default DoctorContextProvider;
+export default LawyerContextProvider;

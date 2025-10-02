@@ -80,6 +80,24 @@ export const clientAppointment = async (req, res) => {
   }
 };
 
+export const lawyersAppointment = async (req, res) => {
+  const lawyerId = req.params.id;
+  try {
+    const myappointments = await prisma.appointment.findMany({
+      where: {
+        lawyer_id: lawyerId,
+      },
+      include: {
+        lawyer: true,
+        client: true,
+      },
+    });
+    return res.status(200).json(myappointments);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 export const cancelAppointment = async (req, res) => {
   try {
     if (req.userRole !== "client") {
@@ -106,6 +124,34 @@ export const cancelAppointment = async (req, res) => {
         .status(200)
         .json({ message: "Appointment cancelled successfully" });
     }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
+
+export const lawyercancelAppointment = async (req, res) => {
+  try {
+    // Check for correct role property (should be userRole, not lawyer_role)
+    if (req.lawyer_role  !== "lawyer") {
+      return res.status(403).json({ message: "Access denied. Lawyer account required" });
+    }
+    const appointmentId = req.params.id;
+    console.log(appointmentId);
+    const lawyerId = req.lawyer_id;
+    console.log(lawyerId);
+    // Only allow lawyer to delete their own appointment
+    const appointment = await prisma.appointment.findUnique({
+      where: { id: parseInt(appointmentId) },
+    });
+    if (!appointment || appointment.lawyer_id !== lawyerId) {
+      return res.status(404).json({
+        message: "Appointment not found or you don't have permission to cancel it",
+      });
+    }
+    await prisma.appointment.delete({
+      where: { id: parseInt(appointmentId) },
+    });
+    return res.status(200).json({ message: "Appointment cancelled successfully" });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

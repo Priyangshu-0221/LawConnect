@@ -34,7 +34,7 @@ model Lawyer {
   speciality               String?
   degree                   String?
   about                    String?
-  experience               String
+  experience               String?
   image                    String        @default("user.jpg")
   fees                     Int           @default(500)
   address                  Json?

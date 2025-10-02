@@ -275,7 +275,6 @@ const AppointmentForm = ({ lawyerId, userId, name, speciality }) => {
                 </div>
 
                 <Button
-                  variant="secondary"
                   type="submit"
                   className="w-full"
                   disabled={loader}
