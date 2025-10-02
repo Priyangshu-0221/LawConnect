@@ -8,10 +8,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "build": "node server.js"
   },
   "dependencies": {
-    "@clerk/express": "^1.7.34",
     "@prisma/client": "^6.16.2",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",

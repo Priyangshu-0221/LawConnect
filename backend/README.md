@@ -92,20 +92,18 @@ _A robust REST API powering seamless connections between clients and legal profe
 
 ### Core Technologies
 
-| Technology         | Version | Purpose                            |
-| ------------------ | ------- | ---------------------------------- |
-| **Node.js**        | Latest  | JavaScript runtime environment     |
-| **Express.js**     | ^5.1.0  | Web application framework          |
-| **Prisma**         | ^6.13.0 | Next-generation ORM                |
-| **PostgreSQL**     | -       | Primary database                   |
-| **@clerk/express** | ^1.7.34 | Advanced authentication (optional) |
+| Technology     | Version | Purpose                        |
+| -------------- | ------- | ------------------------------ |
+| **Node.js**    | Latest  | JavaScript runtime environment |
+| **Express.js** | ^5.1.0  | Web application framework      |
+| **Prisma**     | ^6.13.0 | Next-generation ORM            |
+| **PostgreSQL** | -       | Primary database               |
 
 ### Dependencies
 
 ```json
 {
   "dependencies": {
-    "@clerk/express": "^1.7.34",
     "@prisma/client": "^6.16.2",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.7.0",
@@ -139,7 +137,6 @@ _A robust REST API powering seamless connections between clients and legal profe
 │  │  • Body Parser                            │  │
 │  │  • Auth Middleware                        │  │
 │  │  • Multer (File Upload)                   │  │
-│  │  • Clerk Middleware                       │  │
 │  └──────────────────────────────────────────┘  │
 └──────────────────┬──────────────────────────────┘
                    │
@@ -230,10 +227,6 @@ Before you begin, ensure you have the following installed:
    CLOUDINARY_CLOUD_NAME="your-cloud-name"
    CLOUDINARY_API_KEY="your-api-key"
    CLOUDINARY_API_SECRET="your-api-secret"
-
-   # Clerk Configuration (Optional)
-   CLERK_PUBLISHABLE_KEY="your-clerk-publishable-key"
-   CLERK_SECRET_KEY="your-clerk-secret-key"
    ```
 
 4. **Set Up Database**
@@ -1087,13 +1080,6 @@ JWT_SECRET_KEY="your-super-secret-jwt-key-min-32-characters"
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
 CLOUDINARY_API_SECRET="your-api-secret"
-
-# ===================================
-# CLERK CONFIGURATION (OPTIONAL)
-# ===================================
-# Get these from: https://dashboard.clerk.com/
-CLERK_PUBLISHABLE_KEY="pk_test_..."
-CLERK_SECRET_KEY="sk_test_..."
 ```
 
 ### Generating Secure JWT Secret

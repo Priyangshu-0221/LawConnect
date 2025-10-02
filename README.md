@@ -582,10 +582,6 @@ JWT_SECRET_KEY="your-super-secret-jwt-key-min-32-characters"
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
 CLOUDINARY_API_SECRET="your-api-secret"
-
-# Optional: Clerk Authentication
-CLERK_PUBLISHABLE_KEY="pk_test_..."
-CLERK_SECRET_KEY="sk_test_..."
 ```
 
 ### Frontend Environment Variables
