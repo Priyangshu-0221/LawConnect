@@ -25,7 +25,7 @@ const Footer = () => {
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-black sm:mb-0 dark:text-gray-400">
             <li>
               <Link
-                href="'/about"
+                href="/about"
                 className="hover:underline hover:scale-110 text-lg me-4 md:me-6"
               >
                 About
