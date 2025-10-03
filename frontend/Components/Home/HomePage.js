@@ -20,14 +20,18 @@ const HomePage = () => {
           </button>
         </Link>
       </div>
-      <div className="md:w-screen md:h-180 sm:w-screen sm:h-[500px] overflow-hidden  flex justify-center items-center">
-        <video
-          src="/add.mp4"
-          className="px-5 overflow-hidden rounded-4xl h-fit"
-          autoPlay
-          loop
-          muted
-        />
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+          <video
+            src="/add.mp4"
+            className="w-full h-auto object-cover aspect-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+        </div>
       </div>
     </>
   );

@@ -5,26 +5,23 @@ import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 const Bottom = () => {
   return (
     <>
-      <div className="flex px-12 text-black rounded-4xl  my-3         items-center justify-center w-[100%] h-[80%] sm:w-screen  backdrop-blur-3xl">
-        <div className="w-full flex items-center justify-center">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+        <div className="relative rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
           <video
             autoPlay
             muted
             loop
-            height={300}
-            width={300}
+            playsInline
             src="/bottom.mp4"
-            alt=""
-            className="rounded-3xl                w-full max-w-[90%]
-               sm:max-w-[320px] sm:h-auto
-               md:max-w-[80%]"
+            className="w-full h-auto object-cover aspect-video"
           />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
         </div>
       </div>
-      <div className="px-[25%]">
+      <div className="w-full max-w-md mx-auto px-4 sm:px-6 mb-8">
         <Link href="/signup">
-          <button className="bg-indigo-700 text-xl cursor-pointer text-white h-12 w-full px-5 rounded-full">
-            Create Account{"   "}
+          <button className="bg-indigo-700 hover:bg-indigo-800 active:scale-95 transition-all duration-200 text-xl cursor-pointer text-white h-12 w-full px-5 rounded-full shadow-lg flex items-center justify-center gap-2">
+            Create Account
             <ArrowOutwardIcon />
           </button>
         </Link>
