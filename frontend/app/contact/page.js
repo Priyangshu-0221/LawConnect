@@ -37,7 +37,7 @@ const page = () => {
             </p>
           </div>
           <div>
-            <h1 className="text-xl font-semibold">Carrers at LawConnect</h1>
+            <h1 className="text-xl font-semibold">Careers at LawConnect</h1>
             <br />
             <p className="mb-4 text-lg">
               Learn more about our teams and job openings.
