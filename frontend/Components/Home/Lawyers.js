@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext, useEffect } from "react";
-import { CardCarousel } from "@/components/ui/card-carousel";
+import { CardCarousel } from "@/Components/ui/card-carousel";
 import { AppContext } from "@/context/AppContext";
 
 const Lawyers = () => {

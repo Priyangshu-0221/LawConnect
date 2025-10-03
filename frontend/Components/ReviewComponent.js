@@ -6,7 +6,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/Components/ui/card";
 import VerifiedIcon from "@mui/icons-material/Verified";
 import axios from "axios";
 

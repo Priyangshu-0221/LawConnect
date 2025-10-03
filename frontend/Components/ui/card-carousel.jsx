@@ -16,7 +16,7 @@ import {
   Pagination,
 } from "swiper/modules";
 
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@/Components/ui/badge";
 
 export const CardCarousel = ({
   images,
