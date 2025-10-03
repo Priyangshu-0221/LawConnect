@@ -44,6 +44,7 @@ _A robust REST API powering seamless connections between clients and legal profe
 - **Comprehensive Review System**: Transparent feedback mechanism for legal professionals
 - **Type-Safe Database**: Leveraging Prisma ORM for type-safe database operations
 - **Modern Security**: JWT-based authentication with bcrypt password hashing
+- **Serverless Database**: NeonDB PostgreSQL for scalable, auto-scaling cloud database
 
 ---
 
@@ -97,7 +98,7 @@ _A robust REST API powering seamless connections between clients and legal profe
 | **Node.js**    | Latest  | JavaScript runtime environment |
 | **Express.js** | ^5.1.0  | Web application framework      |
 | **Prisma**     | ^6.13.0 | Next-generation ORM            |
-| **PostgreSQL** | -       | Primary database               |
+| **PostgreSQL** | Latest  | Primary database (NeonDB)      |
 
 ### Dependencies
 
@@ -113,7 +114,11 @@ _A robust REST API powering seamless connections between clients and legal profe
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
+    "nodemon": "^3.1.10",
     "validator": "^13.15.15"
+  },
+  "devDependencies": {
+    "prisma": "^6.13.0"
   }
 }
 ```
@@ -213,8 +218,8 @@ Before you begin, ensure you have the following installed:
    Configure the following variables:
 
    ```env
-   # Database Configuration
-   DATABASE_URL="postgresql://username:password@localhost:5432/lawconnect?schema=public"
+   # Database Configuration (NeonDB)
+   DATABASE_URL="postgresql://neondb_owner:your-password@ep-xxx-xxx.region.azure.neon.tech/neondb?sslmode=require"
 
    # Server Configuration
    PORT=8080
@@ -229,19 +234,46 @@ Before you begin, ensure you have the following installed:
    CLOUDINARY_API_SECRET="your-api-secret"
    ```
 
-4. **Set Up Database**
+4. **Set Up NeonDB Database**
 
-   Run Prisma migrations:
+   **Create a NeonDB PostgreSQL database:**
+
+   1. Go to [NeonDB Console](https://console.neon.tech/)
+   2. Sign up or log in with GitHub
+   3. Click **"Create a project"**
+   4. Choose a project name (e.g., `lawconnect-db`)
+   5. Select a region (preferably close to your backend deployment)
+   6. Copy the **connection string** from the dashboard
+   7. Paste it into your `.env` file as `DATABASE_URL`
+   8. **Important**: Ensure the URL includes `?sslmode=require` at the end
+
+   **Connection String Format:**
+
+   ```
+   postgresql://[user]:[password]@[endpoint]/[database]?sslmode=require
+   ```
+
+   **Run Prisma migrations:**
 
    ```bash
+   # Deploy migrations to NeonDB
+   npx prisma migrate deploy
+
+   # Or for development (creates migration files)
    npx prisma migrate dev --name init
    ```
 
-   Generate Prisma Client:
+   **Generate Prisma Client:**
 
    ```bash
    npx prisma generate
    ```
+
+   **Note**: NeonDB automatically handles connection pooling and SSL. The free tier includes:
+
+   - 0.5 GB storage
+   - Auto-suspend after inactivity (wakes up on connection)
+   - No credit card required
 
 5. **Start the Development Server**
 
@@ -1059,7 +1091,9 @@ Verify JWT Token
 # ===================================
 # DATABASE CONFIGURATION
 # ===================================
-DATABASE_URL="postgresql://username:password@localhost:5432/lawconnect?schema=public"
+# NeonDB PostgreSQL (Serverless)
+# Get this from: https://console.neon.tech/
+DATABASE_URL="postgresql://neondb_owner:your-password@ep-xxx-xxx.region.azure.neon.tech/neondb?sslmode=require"
 
 # ===================================
 # SERVER CONFIGURATION
@@ -1203,6 +1237,32 @@ npx prisma migrate deploy
 npx prisma migrate reset
 ```
 
+### NeonDB-Specific Features
+
+**Connection Pooling:**
+
+- NeonDB automatically handles connection pooling
+- No additional configuration needed
+- Optimal for serverless deployments
+
+**Auto-Suspend (Free Tier):**
+
+- Projects auto-suspend after 5 minutes of inactivity
+- First query after suspension takes ~1-2 seconds (cold start)
+- Subsequent queries are instant
+
+**Branching (Optional):**
+
+- Create database branches for development
+- Test migrations without affecting production
+- Learn more: [NeonDB Branching](https://neon.tech/docs/guides/branching)
+
+**Monitoring:**
+
+- View connection stats in NeonDB dashboard
+- Monitor query performance
+- Set up usage alerts
+
 ### Code Quality
 
 **Linting (if configured):**
@@ -1264,14 +1324,16 @@ curl -X GET http://localhost:8080/api/client/profile \
 **Issue:** Database connection error
 
 ```
-Error: Can't reach database server at localhost:5432
+Error: Can't reach database server
 ```
 
 **Solution:**
 
-- Ensure PostgreSQL is running
-- Verify `DATABASE_URL` in `.env`
-- Check firewall settings
+- Verify `DATABASE_URL` in `.env` (ensure it includes `?sslmode=require`)
+- Check NeonDB dashboard for database status
+- Ensure your NeonDB project is not suspended (free tier auto-suspends after inactivity)
+- Verify internet connectivity
+- Check if connection string has the correct region and endpoint
 
 ---
 
@@ -1367,11 +1429,27 @@ npx prisma generate
 
 ### Deployment Platforms
 
-- **Heroku**: Easy deployment with Postgres add-on
+#### Backend Hosting
+
+- **Render**: Free tier available, auto-deploys from Git (Recommended)
+- **Railway**: Modern, developer-friendly with generous free tier
+- **Heroku**: Easy deployment (requires credit card for free tier)
 - **AWS EC2**: Full control, requires manual setup
 - **DigitalOcean**: App Platform or Droplets
-- **Railway**: Modern, developer-friendly
-- **Render**: Free tier available, auto-deploys from Git
+
+#### Database (Currently Using)
+
+- **NeonDB** ✅: Serverless PostgreSQL with generous free tier
+  - No credit card required
+  - Auto-scaling and connection pooling
+  - Built-in SSL/TLS encryption
+  - Console: [console.neon.tech](https://console.neon.tech/)
+
+#### Alternative Database Options
+
+- **Supabase**: PostgreSQL with built-in auth and storage
+- **Railway PostgreSQL**: Integrated with Railway deployments
+- **ElephantSQL**: Managed PostgreSQL service
 
 ---
 

@@ -13,7 +13,6 @@ const LawyerContextProvider = ({ children }) => {
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/lawyer/alllawyers`
       );
-      console.log(data);
       setLawyers(data);
     } catch (err) {
       toast.error(err.message);

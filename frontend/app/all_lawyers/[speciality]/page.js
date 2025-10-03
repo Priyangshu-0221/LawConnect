@@ -10,7 +10,6 @@ import Image from "next/image";
 export default function LawyerList() {
   const params = useParams();
   const speciality = params.speciality;
-  console.log(speciality);
 
   const [filterDoc, setfilterDoc] = useState([]);
   const { lawyers, allLawyers } = useContext(AppContext);
@@ -19,7 +18,6 @@ export default function LawyerList() {
   }, []);
 
   useEffect(() => {
-    console.log("Running filter for speciality:", speciality);
     if (speciality) {
       const filtered = lawyers.filter(
         (lawyer) =>
@@ -31,10 +29,6 @@ export default function LawyerList() {
       setfilterDoc(lawyers);
     }
   }, [speciality, lawyers]);
-
-  useEffect(() => {
-    console.log("Updated filterDoc:", filterDoc);
-  }, [filterDoc]);
 
   const [token, settoken] = useState(null);
   useEffect(() => {

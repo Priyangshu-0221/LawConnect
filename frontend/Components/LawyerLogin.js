@@ -15,7 +15,6 @@ const LawyerLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("hii");
     try {
       const loginLawyer = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/lawyer/login`,
@@ -38,9 +37,15 @@ const LawyerLogin = () => {
       } else {
         window.location.href = "/lawyerlogin";
       }
-    } catch (error) {   
-      console.log(error);
-      toast.error(error.response.data.message);
+    } catch (error) {
+      console.error("Lawyer login error:", error);
+      if (error.response) {
+        toast.error(error.response.data?.message || "Login failed. Please check your credentials.");
+      } else if (error.request) {
+        toast.error("Cannot connect to server. Please check your internet connection.");
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     }
   };
 

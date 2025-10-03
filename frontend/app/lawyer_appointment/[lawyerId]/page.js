@@ -21,12 +21,18 @@ const MyAppointments = () => {
             },
           }
         );
-        console.log(res.data);
         setMyAppointments(res.data);
       };
       appointmentData();
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error("Fetch lawyer appointments error:", error);
+      if (error.response) {
+        toast.error(error.response.data?.message || "Failed to fetch appointments.");
+      } else if (error.request) {
+        toast.error("Cannot connect to server. Please check your internet connection.");
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     }
   }, []);
 
@@ -49,7 +55,14 @@ const MyAppointments = () => {
       } else {
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error("Cancel appointment error:", error);
+      if (error.response) {
+        toast.error(error.response.data?.message || "Failed to cancel appointment.");
+      } else if (error.request) {
+        toast.error("Cannot connect to server. Please check your internet connection.");
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     }
   };
 

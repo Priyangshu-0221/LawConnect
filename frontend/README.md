@@ -958,17 +958,37 @@ GET  /api/review/getreviews?lawyerId={id}
 
 ### Error Handling
 
+**Comprehensive Error Handling Pattern:**
+
 ```javascript
 try {
   const response = await axios.get(endpoint);
   // Handle success
   toast.success("Operation successful");
 } catch (error) {
-  // Handle error
-  console.error(error);
-  toast.error(error.response?.data?.message || "An error occurred");
+  console.error("Error context:", error);
+  if (error.response) {
+    // Server responded with error status
+    toast.error(error.response.data?.message || "Server error occurred");
+  } else if (error.request) {
+    // Request made but no response received
+    toast.error(
+      "Cannot connect to server. Please check your internet connection."
+    );
+  } else {
+    // Error in request configuration
+    toast.error("An error occurred. Please try again.");
+  }
 }
 ```
+
+**Error Handling Features:**
+
+- Safe optional chaining for error messages
+- Network error detection
+- User-friendly error messages
+- Console errors for debugging (production-safe)
+- Toast notifications for user feedback
 
 ### Authentication Headers
 
@@ -1272,6 +1292,8 @@ Solution:
 - Consistent code formatting
 - Component reusability
 - Clear file structure
+- Production-ready error handling
+- Clean codebase (no debug console logs)
 
 ✅ **User Experience**
 

@@ -48,7 +48,6 @@ const LawyerComponent = () => {
               },
             }
           );
-          console.log(res.data);
           setlawyer(res.data);
           setName(res.data.name || "");
           setspeciality(res.data.speciality || "");
@@ -68,7 +67,6 @@ const LawyerComponent = () => {
           );
         }
       } else {
-        console.log("No lawyer token or role found");
         return;
       }
     };

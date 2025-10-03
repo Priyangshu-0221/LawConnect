@@ -72,12 +72,7 @@ const Navbar = () => {
         }
       })();
     }
-  }, []); // run once
-  // Debug logs (optional; preserves your earlier console behavior)
-  useEffect(() => {
-    if (userId !== null) console.log("User ID updated:", userId);
-    if (lawyerId !== null) console.log("Lawyer ID updated:", lawyerId);
-  }, [userId, lawyerId]);
+  }, []);
 
   // Separate logouts
   const clientLogout = () => {

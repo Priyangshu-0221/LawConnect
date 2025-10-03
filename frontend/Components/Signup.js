@@ -25,12 +25,10 @@ const SignUp = () => {
           password,
         }
       );
-      console.log("userCreated:", userCreated);
       const token = await userCreated.data.token;
       const userId = await userCreated.data.userId;
       const userRole = await userCreated.data.role;
       const userName = userCreated.data.name;
-      console.log(token, userRole);
       localStorage.setItem("token", token);
       localStorage.setItem("user_role", userRole);
       localStorage.setItem("userId", userId);
@@ -38,14 +36,21 @@ const SignUp = () => {
       toast.success("User Created Successfully");
       if (token) {
         window.location.href = "/";
-        setuserName("");
+        setName("");
         setEmail("");
         setPassword("");
       } else {
         window.location.href = "/signup";
       }
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.error("Signup error:", error);
+      if (error.response) {
+        toast.error(error.response.data?.message || "Signup failed. Please try again.");
+      } else if (error.request) {
+        toast.error("Cannot connect to server. Please check your internet connection.");
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     }
   };
 

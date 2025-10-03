@@ -17,6 +17,7 @@ import {
 } from "swiper/modules";
 
 import { Badge } from "@/Components/ui/badge";
+import Link from "next/link";
 
 export const CardCarousel = ({
   images,
@@ -100,14 +101,17 @@ export const CardCarousel = ({
                 {images.map((lawyer, index) => (
                   <SwiperSlide key={index}>
                     <div className="bg-blue-900 p-4 rounded-3xl text-white text-center cursor-pointer hover:scale-105 transition-transform duration-300 shadow-lg">
-                      <img
-                        src={`${lawyer.image}`}
-                        width={300}
-                        height={300}
-                        alt={lawyer.name}
-                        className="rounded-2xl object-cover w-full h-[300px]"
-                        onContextMenu={(e) => e.preventDefault()}
-                      />
+                      <Link href={`/appointment/${lawyer.id}`}>
+                        <img
+                          src={lawyer.image}
+                          width={300}
+                          height={300}
+                          alt={lawyer.name}
+                          className="rounded-2xl object-cover w-full h-[300px]"
+                          onContextMenu={(e) => e.preventDefault()}
+                        />
+                      </Link>
+
                       <div className="mt-2">
                         <p className="bg-green-500 inline-flex items-center gap-1 px-2 py-1 rounded-md mb-1 text-sm font-medium">
                           <Clock size={16} /> Available

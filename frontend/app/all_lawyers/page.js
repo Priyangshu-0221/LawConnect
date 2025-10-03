@@ -17,7 +17,6 @@ const Page = () => {
   useEffect(() => {
     allLawyers();
   }, []);
-  console.log(lawyers);
   return (
     <>
       <div className="text-center underline md:w-screen md:h-auto my-8">

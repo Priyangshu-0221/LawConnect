@@ -25,7 +25,6 @@ const LawyerSignup = () => {
           password,
         }
       );
-      console.log("lawyerCreated:", lawyerCreated);
       if (lawyerCreated && lawyerCreated.data) {
         const lawyer_token = lawyerCreated.data.token;
         const lawyer_role = lawyerCreated.data.lawyer_role;

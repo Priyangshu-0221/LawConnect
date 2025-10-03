@@ -45,7 +45,7 @@ const Speciality = () => {
         {lawyerSpeciality.map(({ label, route, image }) => (
           <Link
             key={route}
-            href={`/lawyers/${route.toLowerCase().replace(/\s+/g, "")}`}
+            href={`/all_lawyers/${route.toLowerCase().replace(/\s+/g, "")}`}
             className="group"
           >
             <div className="bg-white shadow-lg rounded-2xl flex flex-col items-center p-4 w-32 h-40 transition-transform duration-200 hover:scale-105 hover:shadow-xl border border-blue-100">

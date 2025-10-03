@@ -5,7 +5,6 @@ import VerifiedIcon from "@mui/icons-material/Verified";
 import AppointmentFrom from "@/Components/AppointmentFrom";
 import Image from "next/image";
 import axios from "axios";
-import { toast } from "react-toastify";
 import ReviewComponent from "@/Components/ReviewComponent";
 import ReviewFrom from "@/Components/ReviewFrom";
 import { Button } from "@/Components/ui/button";
@@ -14,7 +13,6 @@ import Link from "next/link";
 const Page = () => {
   const params = useParams();
   const lawyerId = params.lawyer;
-  console.log(lawyerId);
   const [userId, setUserId] = useState(null);
   const [lawInfo, setlawInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,8 +38,6 @@ const Page = () => {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/lawyer/singlelawyer?id=${lawyerId}`
         );
-        // Axios wraps the response data in a `data` property
-        console.log(response);
         setlawInfo(response.data);
       } catch (err) {
         console.error("Failed to fetch lawyer info:", err);

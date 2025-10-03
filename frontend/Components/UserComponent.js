@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 
 const UserComponent = () => {
   const [editOption, seteditOption] = useState(false);
-  console.log(editOption);
 
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -36,17 +35,22 @@ const UserComponent = () => {
               },
             }
           );
-          console.log(res.data);
-          setUser(res.data); // save response data to state
+          setUser(res.data);
           setPhone(res.data.phone || " ");
           setAddress(res.data.address || " ");
           setGender(res.data.gender || " ");
-          console.log("user data");
         } else {
           return;
         }
       } catch (error) {
-        toast.error(error.response.data.message);
+        console.error("Profile fetch error:", error);
+        if (error.response) {
+          toast.error(error.response.data?.message || "Failed to fetch profile.");
+        } else if (error.request) {
+          toast.error("Cannot connect to server. Please check your internet connection.");
+        } else {
+          toast.error("An error occurred. Please try again.");
+        }
       }
     };
     userProfile();
@@ -71,7 +75,7 @@ const UserComponent = () => {
         }
       );
       toast.success("Profile updated successfully");
-      setUser(res.data); // optional, depends on response format
+      setUser(res.data);
       seteditOption(false);
     } catch (error) {
       toast.error(error?.response?.data?.message || "Update failed");

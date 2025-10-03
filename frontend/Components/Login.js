@@ -15,7 +15,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("hii");
     try {
       const loginUser = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/client/login`,
@@ -28,7 +27,6 @@ const Login = () => {
       const userId = await loginUser.data.userId;
       const userRole = await loginUser.data.role;
       const username = await loginUser.data.name;
-      console.log(token, userRole);
       localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
       localStorage.setItem("user_role", userRole);
@@ -43,8 +41,14 @@ const Login = () => {
         window.location.href = "/login";
       }
     } catch (error) {
-      console.log(error);
-      toast.error(error.response.data.message);
+      console.error("Login error:", error);
+      if (error.response) {
+        toast.error(error.response.data?.message || "Login failed. Please check your credentials.");
+      } else if (error.request) {
+        toast.error("Cannot connect to server. Please check your internet connection.");
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
     }
   };
 

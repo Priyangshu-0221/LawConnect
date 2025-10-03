@@ -13,7 +13,7 @@ const Lawyers = () => {
     <div className="py-5">
       <CardCarousel
         images={lawyers}
-        autoplayDelay={3000}
+        autoplayDelay={2000}
         showPagination={true}
         showNavigation={true}
       />
