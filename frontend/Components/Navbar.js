@@ -79,6 +79,7 @@ const Navbar = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user_role");
     localStorage.removeItem("userId");
+    localStorage.removeItem("username");
     toast.error("User logged out");
     window.location.href="/";
     setToken(null);

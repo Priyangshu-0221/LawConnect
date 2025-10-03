@@ -32,7 +32,7 @@ const SignUp = () => {
       localStorage.setItem("token", token);
       localStorage.setItem("user_role", userRole);
       localStorage.setItem("userId", userId);
-      localStorage.setItem("userName", userName);
+      localStorage.setItem("username", userName);
       toast.success("User Created Successfully");
       if (token) {
         window.location.href = "/";
