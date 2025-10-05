@@ -87,6 +87,15 @@ _A robust REST API powering seamless connections between clients and legal profe
 - **Cloud Storage** integration with Cloudinary
 - **Secure File URLs** for document access
 
+### 💳 Payment Processing
+
+- **Stripe Integration** for secure payment processing
+- **Appointment Fees** tracked in database
+- **Payment Status** tracking with `isPaid` flag
+- **Payment Verification** endpoint for post-payment updates
+- **Secure Checkout** with Stripe-hosted payment pages
+- **Webhook Support** ready for production payment events
+
 ---
 
 ## 🛠️ Technology Stack
@@ -115,6 +124,7 @@ _A robust REST API powering seamless connections between clients and legal profe
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "nodemon": "^3.1.10",
+    "stripe": "^17.4.0",
     "validator": "^13.15.15"
   },
   "devDependencies": {
@@ -232,6 +242,10 @@ Before you begin, ensure you have the following installed:
    CLOUDINARY_CLOUD_NAME="your-cloud-name"
    CLOUDINARY_API_KEY="your-api-key"
    CLOUDINARY_API_SECRET="your-api-secret"
+
+   # Stripe Configuration
+   STRIPE_SECRET_KEY="sk_test_your_stripe_secret_key"
+   FRONTEND_URL="http://localhost:3000"
    ```
 
 4. **Set Up NeonDB Database**
@@ -791,9 +805,87 @@ Authorization: Bearer <token>
 
 ---
 
+### 🔵 Payment Endpoints
+
+#### 15. **Create Checkout Session** 🔒
+
+```http
+POST /api/new/create-checkout-session
+```
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Request Body:**
+
+```json
+{
+  "fees": 1500
+}
+```
+
+**Response (200):**
+
+```json
+{
+  "sessionId": "cs_test_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0",
+  "url": "https://checkout.stripe.com/c/pay/cs_test_..."
+}
+```
+
+**Description:**
+Creates a Stripe checkout session for appointment payment. Returns a session ID and hosted checkout page URL. The user will be redirected to Stripe's secure payment page.
+
+---
+
+#### 16. **Update Payment Status** 🔒
+
+```http
+POST /api/new/payment-success
+```
+
+**Headers:**
+
+```
+Authorization: Bearer <token>
+```
+
+**Request Body:**
+
+```json
+{
+  "appointmentId": "1"
+}
+```
+
+**Response (200):**
+
+```json
+{
+  "success": true,
+  "message": "Payment status updated successfully",
+  "appointment": {
+    "id": 1,
+    "isPaid": true,
+    "appointment_fee": 1500,
+    "lawyer_name": "Dr. Jane Smith",
+    "client_first_name": "John",
+    "client_last_name": "Doe"
+  }
+}
+```
+
+**Description:**
+Updates the appointment's payment status to `isPaid: true` after successful Stripe payment. Called automatically from the payment success page.
+
+---
+
 ### 🔵 Review Endpoints
 
-#### 15. **Add Review** 🔒
+#### 17. **Add Review** 🔒
 
 ```http
 POST /api/review/addreview
@@ -826,7 +918,7 @@ Authorization: Bearer <token>
 
 ---
 
-#### 16. **Get Lawyer Reviews**
+#### 18. **Get Lawyer Reviews**
 
 ```http
 GET /api/review/allreviews?lawyerId=clx0987654321
@@ -1005,6 +1097,8 @@ model Appointment {
   appointment_date_time DateTime
   term                  Boolean
   message               String
+  appointment_fee       Int      @default(0)
+  isPaid                Boolean  @default(false)
   created_at            DateTime @default(now())
   lawyer_id             String
   lawyer                Lawyer   @relation(fields: [lawyer_id], references: [id])
@@ -1114,6 +1208,13 @@ JWT_SECRET_KEY="your-super-secret-jwt-key-min-32-characters"
 CLOUDINARY_CLOUD_NAME="your-cloud-name"
 CLOUDINARY_API_KEY="your-api-key"
 CLOUDINARY_API_SECRET="your-api-secret"
+
+# ===================================
+# STRIPE CONFIGURATION
+# ===================================
+# Get these from: https://dashboard.stripe.com/test/apikeys
+STRIPE_SECRET_KEY="sk_test_your_stripe_secret_key"
+FRONTEND_URL="http://localhost:3000"  # For payment redirects
 ```
 
 ### Generating Secure JWT Secret

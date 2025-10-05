@@ -9,8 +9,15 @@ import { toast } from "react-toastify";
 const ReviewFrom = ({ username, userId, lawyerId }) => {
   const [rating, setRating] = useState(null);
   const [descriptions, setDescriptions] = useState("");
-  const reviewHandler = (e) => {
+  const [loader, setLoader] = useState(false);
+  const reviewHandler = async (e) => {
     e.preventDefault();
+    if (!rating) {
+      toast.error("Please select a rating before submitting.");
+      return;
+    }
+  
+    setLoader(true);
     const reviewData = {
       userId,
       lawyerId,
@@ -18,20 +25,28 @@ const ReviewFrom = ({ username, userId, lawyerId }) => {
       username,
       descriptions,
     };
-    axios
-      .post(
+  
+    try {
+      await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/review/addreview`,
         reviewData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
-      )
-      .then(() => {
-        toast("Review added successfully!");
-        setDescriptions("");
-        setRating(null);
+      );
+  
+      toast.success("Review added successfully!");
+      setDescriptions("");
+      setRating(null);
+      setTimeout(() => {
         window.location.reload();
-      });
+      }, 1000);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Review failed");
+      console.error("Review error:", error);
+    } finally {
+      setLoader(false);
+    }
   };
   return (
     <div className="w-full h-auto items-center bg-amber-50 px-5">
@@ -49,7 +64,6 @@ const ReviewFrom = ({ username, userId, lawyerId }) => {
           Share Your feedback
         </Label>
         <RadioGroup
-          defaultValue="3"
           onValueChange={(value) => setRating(value)}
         >
           <div className="flex items-center gap-3">
@@ -84,9 +98,15 @@ const ReviewFrom = ({ username, userId, lawyerId }) => {
           onChange={(e) => setDescriptions(e.target.value)}
           required
         />
-        <Button type="submit" className="mt-4">
-          Submit Review
-        </Button>
+        {loader ? (
+          <Button type="submit" disabled className="mt-4">
+            Submitting Review
+          </Button>
+        ) : (
+          <Button type="submit" className="mt-4">
+            Submit Review
+          </Button>
+        )}
       </form>
     </div>
   );

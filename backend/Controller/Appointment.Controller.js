@@ -1,5 +1,7 @@
 import prisma from "../DATABASE/db.config.js";
 import { v2 as cloudinary } from "cloudinary";
+import Stripe from 'stripe';
+
 
 export const appointmentForm = async (req, res) => {
   console.log(req.body);
@@ -16,6 +18,7 @@ export const appointmentForm = async (req, res) => {
       userId,
       name,
       terms,
+      fees,
       speciality,
     } = req.body;
 
@@ -36,6 +39,8 @@ export const appointmentForm = async (req, res) => {
         client_age: parseInt(age),
         lawyer_name: name,
         lawyer_speciality: speciality,
+        appointment_fee : parseInt(fees),
+        isPaid: false,
         message,
         term: term,
         appointment_date_time: new Date(appointment),
@@ -157,3 +162,67 @@ export const lawyercancelAppointment = async (req, res) => {
   }
 };
 
+export const makePayment = async (req, res) => {
+try {
+  const {fees} = req.body;
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+  const amountInCents = Math.round(fees * 100);
+  
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    mode: 'payment',
+    line_items: [
+      {
+        price_data: {
+          currency: 'inr',
+          product_data: {
+            name: 'Appointment Fee',
+          },
+          unit_amount: amountInCents,
+        },
+        quantity: 1,
+      },
+    ],
+    success_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/payment/cancel`,
+  });
+  console.log('Session created', session);
+  // Return both sessionId and the checkout URL
+  res.json({ 
+    sessionId: session.id,
+    url: session.url  // This is the Stripe-hosted checkout page URL
+  });
+} catch (error) {
+  console.error('Error creating checkout session', error);
+  res.status(500).json({ error: error.message });
+}
+}
+
+
+export const paymentSuccess = async (req, res) => {
+  try {
+    const { appointmentId } = req.body;
+    
+    // Find and update the appointment's isPaid status to true
+    const updatedAppointment = await prisma.appointment.update({
+      where: { id: parseInt(appointmentId) },
+      data: { isPaid: true },
+      include: {
+        client: true,
+        lawyer: true,
+      },
+    });
+    
+    return res.status(200).json({
+      success: true,
+      message: "Payment status updated successfully",
+      appointment: updatedAppointment,
+    });
+  } catch (error) {
+    console.error("Error updating payment status:", error);
+    return res.status(500).json({ 
+      success: false,
+      error: error.message 
+    });
+  }
+};

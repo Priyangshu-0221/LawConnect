@@ -8,6 +8,7 @@ import axios from "axios";
 const MyAppointments = () => {
   const [myappointments, setMyAppointments] = useState([]);
 
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     try {
@@ -20,15 +21,20 @@ const MyAppointments = () => {
             },
           }
         );
+        console.log("Fetched appointments:", res.data);
         setMyAppointments(res.data);
       };
       appointmentData();
     } catch (error) {
       console.error("Fetch appointments error:", error);
       if (error.response) {
-        toast.error(error.response.data?.message || "Failed to fetch appointments.");
+        toast.error(
+          error.response.data?.message || "Failed to fetch appointments."
+        );
       } else if (error.request) {
-        toast.error("Cannot connect to server. Please check your internet connection.");
+        toast.error(
+          "Cannot connect to server. Please check your internet connection."
+        );
       } else {
         toast.error("An error occurred. Please try again.");
       }
@@ -56,15 +62,65 @@ const MyAppointments = () => {
     } catch (error) {
       console.error("Cancel appointment error:", error);
       if (error.response) {
-        toast.error(error.response.data?.message || "Failed to cancel appointment.");
+        toast.error(
+          error.response.data?.message || "Failed to cancel appointment."
+        );
       } else if (error.request) {
-        toast.error("Cannot connect to server. Please check your internet connection.");
+        toast.error(
+          "Cannot connect to server. Please check your internet connection."
+        );
       } else {
         toast.error("An error occurred. Please try again.");
       }
     }
   };
 
+  const makePayment = async (fees, appointmentId) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        toast.error("Please login to make payment");
+        return;
+      }
+
+      toast.info("Redirecting to payment...");
+
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/new/create-checkout-session`,
+        { fees: fees },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      
+      const { url } = response.data;
+      console.log("Redirecting to Stripe Checkout URL:", url);
+      
+      if (!url) {
+        toast.error("Failed to create payment session");
+        return;
+      }
+
+      // Store appointmentId in localStorage so we can update it after payment
+      localStorage.setItem("pendingPaymentAppointmentId", appointmentId);
+      
+      // Redirect to Stripe Checkout URL
+      window.location.href = url;
+      
+    } catch (error) {
+      console.error("Payment error:", error);
+      if (error.response) {
+        toast.error(error.response.data.error || "Payment failed");
+      } else if (error.request) {
+        toast.error("Network error. Please check your connection");
+      } else {
+        toast.error("Payment failed. Please try again");
+      }
+    }
+  };
+  
   return (
     <div className="py-5 flex flex-col">
       <div className="text-center py-2">
@@ -100,6 +156,9 @@ const MyAppointments = () => {
                   {appointment.lawyer?.name}
                 </h1>
                 <h3>{appointment.lawyer?.speciality}</h3>
+                <h3 className="text-lg">
+                  Appointment Fees- Rs {appointment.lawyer?.fees}
+                </h3>
                 <h3 className="text-xl">{appointment.lawyer?.address.line1}</h3>
                 <h3 className="text-xl">{appointment.lawyer?.address.line2}</h3>
 
@@ -113,7 +172,24 @@ const MyAppointments = () => {
                 </h1>
               </div>
               <div className="flex flex-col md:w-[15%] sm:w-screen py-6 gap-y-5">
-                <Button className="text-lg">Proceed to Payment</Button>
+                <h1>
+                  Payment Type-{" "}
+                  {appointment.isPaid ? <Button>Online</Button> : <Button>Offline</Button>}
+                </h1>
+                {appointment.isPaid ? (
+                  <Button className="text-lg bg-green-600 text-black">
+                    Paid
+                  </Button>
+                ) : (
+                  <Button
+                    className="text-lg"
+                    onClick={() =>
+                      makePayment(appointment.lawyer.fees, appointment.id)
+                    }
+                  >
+                    Proceed to Payment
+                  </Button>
+                )}
                 <Button
                   className="cursor-pointer text-lg"
                   variant="destructive"

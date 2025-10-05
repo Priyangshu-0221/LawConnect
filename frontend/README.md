@@ -101,6 +101,26 @@ _A sleek, responsive, and feature-rich user interface connecting clients with le
   - Cancel appointments with confirmations
   - Appointment status tracking
   - Document access and download
+  - **Payment processing with Stripe**
+  - **Payment status tracking (Paid/Unpaid)**
+  - **Secure checkout redirect**
+
+### 💳 Payment System
+
+- **Stripe Integration**
+
+  - Secure payment processing
+  - Stripe-hosted checkout pages
+  - Card payment support
+  - Payment verification
+  - Transaction tracking
+
+- **Payment Features**
+  - Appointment fee display
+  - One-click payment initiation
+  - Automatic payment status updates
+  - Success/cancel page redirects
+  - Payment confirmation notifications
 
 ### ⭐ Review & Rating System
 
@@ -171,6 +191,7 @@ _A sleek, responsive, and feature-rich user interface connecting clients with le
 | **React Hook Form** | 7.60.0  | Form validation     |
 | **Axios**           | 1.11.0  | HTTP client         |
 | **React Toastify**  | 11.0.5  | Toast notifications |
+| **Stripe.js**       | ^7.7.0  | Payment processing  |
 
 ### UI Components
 
@@ -521,6 +542,8 @@ frontend/
 | `/user/[id]`            | `user/[id]/page.js`                   | Client profile page |
 | `/myappointment/[id]`   | `myappointment/[appointment]/page.js` | Client appointments |
 | `/appointment/[lawyer]` | `appointment/[lawyer]/page.js`        | Book appointment    |
+| `/payment/success`      | `payment/success/page.js`             | Payment success     |
+| `/payment/cancel`       | `payment/cancel/page.js`              | Payment cancelled   |
 
 ### Protected Lawyer Routes 🔒
 
@@ -758,6 +781,13 @@ Create a `.env.local` file:
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
 
 # ===================================
+# PAYMENT CONFIGURATION
+# ===================================
+# Stripe Publishable Key (Optional - used for client-side integration)
+# Note: Current implementation uses server-side only approach
+# NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+
+# ===================================
 # OPTIONAL CONFIGURATIONS
 # ===================================
 # Google Analytics
@@ -947,6 +977,13 @@ GET  /api/new/myappointments (Protected)
 GET  /api/new/lawyer/appointment/{lawyerId} (Protected)
 DELETE /api/new/appointment/delete/{id} (Protected)
 DELETE /api/new/lawyer/delete/{id} (Protected)
+```
+
+#### Payment Endpoints
+
+```javascript
+POST /api/new/create-checkout-session (Protected)
+POST /api/new/payment-success (Protected)
 ```
 
 #### Review Endpoints
@@ -1316,9 +1353,10 @@ Solution:
 
 ### Planned Features
 
+- [x] **Payment gateway integration with Stripe**
 - [ ] Real-time chat between clients and lawyers
 - [ ] Video consultation integration
-- [ ] Payment gateway integration
+- [ ] Advanced payment features (refunds, invoices)
 - [ ] Advanced search and filters
 - [ ] Email notifications
 - [ ] SMS reminders for appointments

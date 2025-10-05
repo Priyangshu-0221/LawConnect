@@ -10,6 +10,7 @@
 [![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![TailwindCSS](https://img.shields.io/badge/Tailwind-4.1.11-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Stripe](https://img.shields.io/badge/Stripe-008CDD?style=for-the-badge&logo=stripe&logoColor=white)](https://stripe.com/)
 
 _A full-stack legal consultation platform connecting clients with qualified legal professionals_
 
@@ -101,6 +102,13 @@ _A full-stack legal consultation platform connecting clients with qualified lega
   - Secure document upload via Multer
   - Cloud storage with Cloudinary
   - Easy document access for both parties
+- **Payment Processing**
+  - Integrated Stripe payment gateway
+  - Secure checkout sessions
+  - Appointment fee tracking
+  - Payment status management (Paid/Unpaid)
+  - Automatic status updates after payment
+  - Transaction verification
 - **Appointment Tracking**
   - Real-time appointment status
   - Email notifications (planned)
@@ -152,6 +160,7 @@ _A full-stack legal consultation platform connecting clients with qualified lega
 | **React Hook Form** | 7.60.0   | Form validation              |
 | **Axios**           | 1.11.0   | HTTP client                  |
 | **React Toastify**  | 11.0.5   | Notifications                |
+| **Stripe.js**       | 7.7.0    | Payment processing           |
 
 ### Backend
 
@@ -165,6 +174,7 @@ _A full-stack legal consultation platform connecting clients with qualified lega
 | **Bcrypt**       | 6.0.0    | Password hashing         |
 | **Multer**       | 2.0.2    | File upload handling     |
 | **Cloudinary**   | 2.7.0    | Cloud storage            |
+| **Stripe**       | 17.4.0   | Payment processing       |
 | **Validator.js** | 13.15.15 | Input validation         |
 
 ---
@@ -470,6 +480,9 @@ LawConnect/
 │   │   ├── user/
 │   │   ├── lawyer/
 │   │   ├── myappointment/
+│   │   ├── payment/                  # Payment pages
+│   │   │   ├── success/             # Payment success
+│   │   │   └── cancel/              # Payment cancelled
 │   │   └── lawyer_appointment/
 │   │
 │   ├── Components/                   # Reusable components
@@ -548,6 +561,11 @@ Authorization: Bearer <your-jwt-token>
 - `GET /api/new/lawyersappointment/:id` - Get lawyer appointments
 - `DELETE /api/new/cancelappointment/:id` 🔒 - Cancel appointment
 
+#### Payment Endpoints
+
+- `POST /api/new/create-checkout-session` 🔒 - Create Stripe checkout session
+- `POST /api/new/payment-success` 🔒 - Update payment status after success
+
 #### Review Endpoints
 
 - `POST /api/review/addreview` 🔒 - Submit a review
@@ -567,7 +585,7 @@ For detailed API documentation, see:
 
 Create a `.env` file in the `backend/` directory:
 
-```env
+````env
 # Database
 DATABASE_URL="postgresql://username:password@localhost:5432/lawconnect?schema=public"
 
@@ -578,13 +596,19 @@ NODE_ENV=development
 # Authentication
 JWT_SECRET_KEY="your-super-secret-jwt-key-min-32-characters"
 
-# Cloudinary
-CLOUDINARY_CLOUD_NAME="your-cloud-name"
-CLOUDINARY_API_KEY="your-api-key"
-CLOUDINARY_API_SECRET="your-api-secret"
-```
+   # Cloudinary
+   CLOUDINARY_CLOUD_NAME="your-cloud-name"
+   CLOUDINARY_API_KEY="your-api-key"
+   CLOUDINARY_API_SECRET="your-api-secret"
 
-### Frontend Environment Variables
+# Stripe Payment Processing
+STRIPE_SECRET_KEY="sk_test_your_stripe_secret_key"
+FRONTEND_URL="http://localhost:3000"
+
+   # Stripe Payment
+   STRIPE_SECRET_KEY="sk_test_your_stripe_secret_key"
+   FRONTEND_URL="http://localhost:3000"
+   ```### Frontend Environment Variables
 
 Create a `.env.local` file in the `frontend/` directory:
 
@@ -592,12 +616,15 @@ Create a `.env.local` file in the `frontend/` directory:
 # API Configuration
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
 
+# Payment Configuration (Optional - for client-side Stripe integration)
+# NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
+
 # Optional: Analytics
 # NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
 # Optional: Sentry Error Tracking
 # NEXT_PUBLIC_SENTRY_DSN=https://xxxxx@sentry.io/xxxxx
-```
+````
 
 ### Generating Secure Secrets
 
@@ -877,9 +904,10 @@ Error: Invalid credentials
 
 ### Planned Features
 
+- [x] **Payment gateway integration (Stripe)** - ✅ Completed
 - [ ] Real-time chat between clients and lawyers
 - [ ] Video consultation integration (Zoom/Google Meet)
-- [ ] Payment gateway integration (Stripe/PayPal)
+- [ ] Advanced payment features (refunds, invoices, subscriptions)
 - [ ] Advanced search and filters
 - [ ] Email/SMS notifications
 - [ ] Multi-language support (i18n)

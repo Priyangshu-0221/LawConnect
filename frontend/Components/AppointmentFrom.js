@@ -12,7 +12,7 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const AppointmentForm = ({ lawyerId, userId, name, speciality }) => {
+const AppointmentForm = ({ lawyerId, userId, name, speciality , fees }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
@@ -45,6 +45,7 @@ const AppointmentForm = ({ lawyerId, userId, name, speciality }) => {
       formData.append("lawyerId", lawyerId);
       formData.append("userId", userId?.toString());
       formData.append("speciality", speciality);
+      formData.append("fees", fees);
       formData.append("term", terms.toString());
       setLoader(true);
       await axios.post(
@@ -210,6 +211,19 @@ const AppointmentForm = ({ lawyerId, userId, name, speciality }) => {
                     value={speciality || ""}
                     readOnly
                   />
+                </div>
+                
+                <div className="grid gap-3">
+                  <Label htmlFor="Appointment Fee" className="text-lg">
+                    Appointment Fee
+                  </Label>
+                  <Input
+                    id="Lawyername"
+                    name="Lawyername"
+                    value={fees || ""}
+                    readOnly
+                  />
+                  <input type="hidden" name="lawyerId" value={fees} />
                 </div>
 
                 <div className="grid gap-3">

@@ -161,6 +161,7 @@ const Page = () => {
             lawyerId={lawyerId}
             name={lawInfo?.name}
             speciality={lawInfo?.speciality}
+            fees = {lawInfo?.fees}
           />
         )}
       </div>

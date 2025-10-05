@@ -55,6 +55,8 @@ model Appointment {
   client_gender         String
   lawyer_name           String
   lawyer_speciality     String
+  appointment_fee  Int  @default(0)
+  isPaid               Boolean @default(false)
   documents_url         String
   appointment_date_time DateTime
   term                  Boolean

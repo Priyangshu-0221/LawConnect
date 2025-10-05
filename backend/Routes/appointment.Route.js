@@ -5,6 +5,8 @@ import {
   clientAppointment,
   lawyercancelAppointment,
   lawyersAppointment,
+  makePayment,
+  paymentSuccess,
 } from "../Controller/Appointment.Controller.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 import upload from "../middlewares/multer.js";
@@ -17,7 +19,8 @@ router.post(
   upload.single("documents"),
   appointmentForm
 );
-
+router.post("/create-checkout-session", authMiddleware, makePayment );
+router.post("/payment-success", authMiddleware, paymentSuccess);
 router.get("/myappointments", authMiddleware, clientAppointment);
 router.get("/lawyer/appointment/:id", authMiddleware, lawyersAppointment);
 router.delete("/appointment/delete/:id", authMiddleware, cancelAppointment);
