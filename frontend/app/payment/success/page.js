@@ -103,13 +103,7 @@ function PaymentSuccessContent() {
         )}
         
         <div className="space-y-3">        
-          <Button 
-            onClick={() => router.push("/myappointment/appointment")}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-          >
-            View My Appointments
-          </Button>
-          
+         
           <Button 
             onClick={() => router.push("/")}
             variant="outline"
