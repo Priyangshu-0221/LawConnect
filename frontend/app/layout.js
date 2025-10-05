@@ -4,6 +4,7 @@ import Navbar from "@/Components/Navbar";
 import Footer from "@/Components/Footer";
 import LawyerContextProvider from "@/context/AppContext";
 import { ToastContainer, toast } from "react-toastify";
+import { Analytics } from "@vercel/analytics/next"
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ToastContainer position="top-center"/>
         <Navbar />
-        <LawyerContextProvider> {children}</LawyerContextProvider>
+        <LawyerContextProvider> {children}<Analytics /></LawyerContextProvider>
         <Footer />
       </body>
     </html>
